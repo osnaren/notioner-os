@@ -119,3 +119,5 @@ const checkNewMovies = async (body) => {
   const response = await notion.databases.query(body);
   return response;
 };
+
+module.exports = app;
