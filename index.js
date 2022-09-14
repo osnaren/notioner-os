@@ -1,3 +1,4 @@
+require("dotenv").config({ path: "./.env" });
 AUTH_TOKEN = process.env.AUTH_TOKEN;
 
 const fs = require("fs");
@@ -79,7 +80,7 @@ const updatePage = async (data) => {
   }
 };
 
-app.get("/listenNewMovies", async (req, res) => {
+app.post("/listenNewMovies", async (req, res) => {
   const databaseId = "53999533-c639-467e-b0cb-bec31b241407";
   reqTime = req.body.time;
   let before_time = new Date(reqTime);
@@ -119,3 +120,5 @@ const checkNewMovies = async (body) => {
   const response = await notion.databases.query(body);
   return response;
 };
+
+module.exports = app;
