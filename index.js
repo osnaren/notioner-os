@@ -85,7 +85,7 @@ app.post("/listenNewMovies", async (req, res) => {
   reqTime = req.body.time;
   let before_time = new Date(reqTime);
   let after_time = new Date(reqTime);
-  after_time.setMinutes(after_time.getMinutes() - 5);
+  after_time.setMinutes(after_time.getMinutes() - 8);
   let body = {
     database_id: databaseId,
     filter: {
