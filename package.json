@@ -11,10 +11,10 @@
   "author": "osnaren",
   "license": "ISC",
   "dependencies": {
-    "@notionhq/client": "^2.1.1",
-    "dotenv": "^16.0.2",
-    "express": "^4.18.1",
-    "node-fetch": "^2.6.7",
-    "nodemon": "^2.0.19"
+    "@notionhq/client": "^2.2.13",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "node-fetch": "^2.7.0",
+    "nodemon": "^3.0.1"
   }
 }
