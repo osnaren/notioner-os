@@ -1,0 +1,167 @@
+@import url("https://fonts.googleapis.com/css2?family=Fredericka+the+Great&display=swap&family=Advent+Pro");
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  width: 100vw;
+  height: 100vh;
+  margin: auto;
+  background: linear-gradient(180deg, #d9cbba, #d3d8d6, #4e8b84);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.logo {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.logo img {
+  width: 80px;
+  height: 80px;
+}
+
+.blob {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  content: "";
+  left: 30%;
+  top: 20%;
+  width: 450px;
+  height: 450px;
+  background: #4f8175;
+  border-radius: 62% 47% 82% 35% / 45% 45% 80% 66%;
+  will-change: border-radius, transform, opacity;
+  -webkit-animation: blobAnimate 5s linear infinite;
+  animation: blobAnimate 5s linear infinite;
+}
+
+@keyframes blobAnimate {
+
+  0%,
+  100% {
+    border-radius: 42% 58% 70% 30% / 45% 45% 55% 55%;
+    transform: translate3d(0, 0, 0) rotateZ(0.01deg);
+  }
+
+  34% {
+    border-radius: 70% 30% 46% 54% / 30% 29% 71% 70%;
+    transform: translate3d(0, 5px, 0) rotateZ(0.01deg);
+  }
+
+  50% {
+    transform: translate3d(0, 0, 0) rotateZ(0.01deg);
+  }
+
+  67% {
+    border-radius: 100% 60% 60% 100% / 100% 100% 60% 60%;
+    transform: translate3d(0, -3px, 0) rotateZ(0.01deg);
+  }
+}
+
+.text__blob {
+  font-family: "Fredericka the Great", cursive;
+  font-size: 3rem;
+  font-weight: 700;
+  color: #e0eef9;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: #d3d8d6 0px -20px 50px 0px;
+  border-top-right-radius: 50px;
+  border-top-left-radius: 50px;
+}
+
+.footer__text {
+  font-family: "Advent Pro", sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #e0eef9;
+}
+
+.footer__text a {
+  color: #10261C;
+  text-decoration: none;
+}
+
+#mediaContainer {
+  display: none;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 10px;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+}
+
+.media-item {
+  padding: 10px;
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.media-video {
+  display: none;
+}
+
+.media-img {
+  width: 20rem;
+  height: 20rem;
+}
+
+.media-description {
+  display: none;
+}
+
+#mediaContainer div:hover {
+  transform: scale(1.05);
+}
+
+@media screen and (max-width: 600px) {
+  #media-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.magicpattern {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: repeat;
+}
