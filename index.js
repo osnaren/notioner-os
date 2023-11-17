@@ -1,40 +1,63 @@
-require("dotenv").config({ path: "./.env" });
-AUTH_TOKEN = process.env.AUTH_TOKEN;
-
-const fs = require("fs");
 const express = require("express");
-var bodyParser = require("body-parser");
+const bodyParser = require("body-parser");
+const jwt = require("jsonwebtoken");
+require("dotenv").config();
+const helmet = require("helmet");
+
+// Import custom authentication middleware
+const auth = require("./utils/authenticate");
 const preprocess = require("./preprocess");
 
-const { Client } = require("@notionhq/client");
-const fetch = require("node-fetch");
-
-const port = process.env.PORT || 3000;
+// Initialize App
+// deepcode ignore UseCsurfForExpress
 const app = express();
+const port = process.env.PORT || 3000;
+
+// Middleware
+app.use(express.static("./public"));
+app.use(helmet());
 app.use(bodyParser.json());
-var urlencodedParser = bodyParser.urlencoded({ extended: false });
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(auth.authenticate); // Custom authentication middleware
 
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send("Something broke!");
+});
+
+// Start the server
 app.listen(port, () => {
-  console.log(`Notioner :: ${port}`);
+  console.log(`Notioner Running at port :: ${port}`);
 });
 
-const notion = new Client({
-  auth: AUTH_TOKEN,
-});
-preprocess.init(notion);
-
+// Routes
 app.get("/", (req, res, next) => {
-  res.send("Notioner");
+  const options = {
+    root: __dirname,
+    dotfiles: "deny",
+    headers: {
+      "x-timestamp": Date.now(),
+      "x-sent": true,
+    },
+    maxAge: "1d",
+  };
+  res.sendFile("index.html", options, (err) => {
+    if (err) {
+      next(err);
+    } else {
+      console.log("Sent:", "index.html");
+    }
+  });
 });
 
-app.get("/favicon.ico", (req, res) => {
-  res.sendFile(__dirname + "/favicon.png");
+app.get("/test", (req, res) => {
+  res.send("Test");
 });
 
 let postReqData;
-let pageId;
 
-app.post("/writeToNotion", urlencodedParser, async (req, res) => {
+app.post("/writeToNotion", async (req, res) => {
   postReqData = req.body;
   await preparePatchData(postReqData);
   res.status(200).send("Hello World!");
@@ -44,7 +67,6 @@ const retrievePage = async (pageId) => {
   const response = await notion.pages.retrieve({ page_id: pageId });
   console.log(JSON.stringify(response));
 };
-// retrievePage("");
 
 const preparePatchData = async (postReqData) => {
   console.log("Preparing data for patching : ", postReqData["Item ID"]);
