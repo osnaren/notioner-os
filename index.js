@@ -14,7 +14,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 // Middleware
-app.use(express.static("./public"));
+app.use(express.static("public"));
 app.use(helmet());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -142,5 +142,10 @@ const checkNewMovies = async (body) => {
   const response = await notion.databases.query(body);
   return response;
 };
+
+// Catch-all route for undefined paths
+app.all("*", (req, res) => {
+  res.status(404).send("Not Found");
+});
 
 module.exports = app;
