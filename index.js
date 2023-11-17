@@ -19,9 +19,9 @@ app.use(
   helmet({
     contentSecurityPolicy: {
       directives: {
-        defaultSrc: ["'self'"], // Default policy for loading content
-        scriptSrc: ["'self'", "https://vercel.live"], // Allow scripts from these domains
-        // Add other directives as needed
+        defaultSrc: ["'self'", "https://vercel.live", "https:"],
+        scriptSrc: ["'self'", "https://vercel.live", "https:"],
+        connectSrc: ["'self'", "https://vercel.live"],
       },
     },
   })
