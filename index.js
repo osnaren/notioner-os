@@ -2,7 +2,6 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
-const helmet = require("helmet");
 
 // Import custom authentication middleware
 const auth = require("./utils/authenticate");
@@ -15,17 +14,6 @@ const port = process.env.PORT || 3000;
 
 // Middleware
 app.use(express.static("public"));
-app.use(
-  helmet({
-    contentSecurityPolicy: {
-      directives: {
-        defaultSrc: ["'self'", "https://vercel.live", "https:"],
-        scriptSrc: ["'self'", "https://vercel.live", "https:"],
-        connectSrc: ["'self'", "https://vercel.live"],
-      },
-    },
-  })
-);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
