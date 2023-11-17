@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const jwt = require("jsonwebtoken");
+const path = require("path");
+
 require("dotenv").config();
 
 // Import custom authentication middleware
