@@ -15,7 +15,18 @@ const port = process.env.PORT || 3000;
 
 // Middleware
 app.use(express.static("public"));
-app.use(helmet());
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"], // Default policy for loading content
+        scriptSrc: ["'self'", "https://vercel.live"], // Allow scripts from these domains
+        // Add other directives as needed
+      },
+    },
+  })
+);
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(auth.authenticate); // Custom authentication middleware
