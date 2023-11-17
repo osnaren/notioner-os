@@ -8,7 +8,6 @@ const auth = require("./utils/authenticate");
 const preprocess = require("./preprocess");
 
 // Initialize App
-// deepcode ignore UseCsurfForExpress
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -34,14 +33,13 @@ app.listen(port, () => {
 app.get("/", (req, res, next) => {
   const options = {
     root: __dirname,
-    dotfiles: "deny",
     headers: {
       "x-timestamp": Date.now(),
       "x-sent": true,
     },
     maxAge: "1d",
   };
-  res.sendFile("index.html", options, (err) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"), (err) => {
     if (err) {
       next(err);
     } else {
