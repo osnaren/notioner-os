@@ -17,7 +17,7 @@ app.use(express.static("public"));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(auth.authenticate); // Custom authentication middleware
+// app.use(auth.authenticate); // Custom authentication middleware
 
 // Error handling middleware
 app.use((err, req, res, next) => {
