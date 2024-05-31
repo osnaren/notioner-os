@@ -20,7 +20,8 @@ import {
 
 const fetchNewMovies = async (requestTime) => {
   const before = new Date(requestTime);
-  const after = new Date(requestTime).setMinutes(before.getMinutes() - 7);
+  const after = new Date(requestTime);
+  after.setMinutes(before.getMinutes() - 7);
   const query = {
     filter: {
       and: [

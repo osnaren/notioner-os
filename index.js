@@ -1,10 +1,7 @@
 import express from "express";
 import bodyParser from "body-parser";
 import { join, dirname } from "path";
-import dotenv from "dotenv";
-
-// Load environment variables
-dotenv.config();
+import "dotenv/config";
 
 // Import custom authentication middleware
 import { authenticate } from "#utils/authenticate.js";
@@ -12,12 +9,11 @@ import { authenticate } from "#utils/authenticate.js";
 // Dependencies
 import movie from "#modules/n-movies/movies.js";
 import { writeFetchStatus } from "#utils/writeStatus.js";
-import { FETCH_STATUS } from "#utils/constants.js";
+import { FETCH_STATUS, __dirname } from "#utils/constants.js";
 
 // Initialize App
 const app = express();
 const port = process.env.PORT || 3000;
-const __dirname = dirname(import.meta.url).replace("file://", "");
 
 // Middleware
 app.use(express.static(join(__dirname, "public")));
@@ -80,10 +76,9 @@ app.post("/fetchNewMovies", async (req, res) => {
   const date = new Date();
   FETCH_STATUS.lastFetched = date.toISOString();
   FETCH_STATUS.nextFetch = new Date(date.getTime() + 5 * 60000).toISOString();
-
   writeFetchStatus(FETCH_STATUS.lastFetched, FETCH_STATUS.nextFetch);
 
-  reqTime = req.body.time;
+  const reqTime = req.body.time;
   const response = await movie.fetchNewMovies(reqTime);
   res.status(200).send(response);
 });

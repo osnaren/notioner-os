@@ -1,4 +1,10 @@
+import { fileURLToPath } from "url";
+import { dirname } from "path";
+
 export const AUTH_EXCEPT_PATHS = ["/", "/favicon.ico", "/status"];
+
+const __filename = fileURLToPath(import.meta.url);
+export const __dirname = dirname(__filename).replace("utils", "");
 
 export let FETCH_STATUS = {
   lastFetched: null,

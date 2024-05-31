@@ -1,4 +1,4 @@
-import verify from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 import { AUTH_EXCEPT_PATHS } from "#utils/constants.js";
 const JWT_SECRET = process.env.JWT_SECRET_KEY;
 
@@ -21,7 +21,7 @@ export const authenticate = (req, res, next) => {
   }
 
   try {
-    const decoded = verify(token, JWT_SECRET);
+    const decoded = jwt.verify(token, JWT_SECRET);
     req.user = decoded; // Add the decoded token to the request
     next();
   } catch (error) {
