@@ -1,7 +1,7 @@
-const fs = require("fs");
-const path = require("path");
+import fs from "fs";
+import path from "path";
 
-const writeFetchStatus = (lastFetched, nextFetch) => {
+export const writeFetchStatus = (lastFetched, nextFetch) => {
   filePath = path.join(__dirname, "public", "data", "status.json");
   const data = {
     lastFetched,
@@ -15,5 +15,3 @@ const writeFetchStatus = (lastFetched, nextFetch) => {
     }
   });
 };
-
-module.exports = writeFetchStatus;

@@ -1,25 +1,32 @@
-const express = require("express");
-const bodyParser = require("body-parser");
-const path = require("path");
+import express from "express";
+import bodyParser from "body-parser";
+import { join, dirname } from "path";
+import dotenv from "dotenv";
 
-require("dotenv").config();
+// Load environment variables
+dotenv.config();
 
 // Import custom authentication middleware
-const auth = require("./utils/authenticate");
-const preprocess = require("./preprocess");
-const writeFetchStatus = require("./utils/writeStatus");
-let { FETCH_STATUS } = require("./utils/constants");
+import { authenticate } from "#utils/authenticate.js";
+
+// Dependencies
+import preProcessData from "./preprocess.js";
+import movie from "#modules/n-movies/movies.js";
+import { writeFetchStatus } from "#utils/writeStatus.js";
+import { FETCH_STATUS } from "#utils/constants.js";
 
 // Initialize App
 const app = express();
 const port = process.env.PORT || 3000;
+const __dirname = dirname(import.meta.url).replace("file://", "");
 
 // Middleware
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(join(__dirname, "public")));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(auth.authenticate); // Custom authentication middleware
+// Custom authentication middleware
+app.use(authenticate);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
@@ -42,7 +49,7 @@ app.get("/", (req, res, next) => {
     },
     maxAge: "1d",
   };
-  res.sendFile(path.join(__dirname, "public", "index.html"), (err) => {
+  res.sendFile(join(__dirname, "public", "index.html"), (err) => {
     if (err) {
       next(err);
     } else {
@@ -52,7 +59,7 @@ app.get("/", (req, res, next) => {
 });
 
 app.get("/status", (req, res, next) => {
-  res.sendFile(path.join(__dirname, "public", "status.html"), (err) => {
+  res.sendFile(join(__dirname, "public", "status.html"), (err) => {
     if (err) {
       next(err);
     } else {
@@ -163,4 +170,4 @@ app.all("*", (req, res) => {
   res.status(404).send("Not Found");
 });
 
-module.exports = app;
+export default app;

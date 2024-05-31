@@ -18,5 +18,12 @@
     "jsonwebtoken": "^9.0.2",
     "node-fetch": "^2.7.0",
     "nodemon": "^3.0.1"
+  },
+  "type": "module",
+  "imports": {
+    "#modules/*": "./modules/*",
+    "#public/*": "./public/*",
+    "#utils/*": "./utils/*",
+    "#routes/*": "./routes/*"
   }
 }

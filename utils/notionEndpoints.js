@@ -1,7 +1,8 @@
-require("dotenv").config({ path: "./.env" });
-AUTH_TOKEN = process.env.AUTH_TOKEN;
+import dotenv from "dotenv";
+dotenv.config({ path: "./.env" });
+const AUTH_TOKEN = process.env.AUTH_TOKEN;
 
-const { Client } = require("@notionhq/client");
+import { Client } from "@notionhq/client";
 
 // Initialize Notion client
 const notion = new Client({
@@ -365,7 +366,7 @@ const search = async (query) => {
   }
 };
 
-module.exports = {
+export default {
   appendBlockChildren,
   retrieveBlock,
   retrieveBlockChildren,

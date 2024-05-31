@@ -1,8 +1,8 @@
-const jwt = require("jsonwebtoken");
-const { AUTH_EXCEPT_PATHS } = require("./constants");
+import verify from "jsonwebtoken";
+import { AUTH_EXCEPT_PATHS } from "#utils/constants.js";
 const JWT_SECRET = process.env.JWT_SECRET_KEY;
 
-const authenticate = (req, res, next) => {
+export const authenticate = (req, res, next) => {
   // Check if the request path is in the exceptions list
   if (AUTH_EXCEPT_PATHS.includes(req.path)) {
     return next(); // Bypass authentication
@@ -21,15 +21,11 @@ const authenticate = (req, res, next) => {
   }
 
   try {
-    const decoded = jwt.verify(token, JWT_SECRET);
+    const decoded = verify(token, JWT_SECRET);
     req.user = decoded; // Add the decoded token to the request
     next();
   } catch (error) {
     console.error(error); // Internal logging
     res.status(403).send("Invalid token."); // Public response
   }
-};
-
-module.exports = {
-  authenticate,
 };
