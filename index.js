@@ -110,60 +110,17 @@ const preparePatchData = async (postReqData) => {
   await updatePage(data);
 };
 
-const updatePage = async (data) => {
-  try {
-    const response = await notion.pages.update(data);
-    console.log(response);
-  } catch (err) {
-    console.log(err);
-  }
-};
-
-app.post("/listenNewMovies", async (req, res) => {
+app.post("/fetchNewMovies", async (req, res) => {
   const date = new Date();
   FETCH_STATUS.lastFetched = date.toISOString();
   FETCH_STATUS.nextFetch = new Date(date.getTime() + 5 * 60000).toISOString();
 
   writeFetchStatus(FETCH_STATUS.lastFetched, FETCH_STATUS.nextFetch);
-  const databaseId = "53999533-c639-467e-b0cb-bec31b241407";
+
   reqTime = req.body.time;
-  let before_time = new Date(reqTime);
-  let after_time = new Date(reqTime);
-  after_time.setMinutes(after_time.getMinutes() - 8);
-  let body = {
-    database_id: databaseId,
-    filter: {
-      and: [
-        {
-          timestamp: "created_time",
-          created_time: {
-            after: after_time.toISOString(),
-          },
-        },
-        {
-          timestamp: "created_time",
-          created_time: {
-            before: before_time.toISOString(),
-          },
-        },
-      ],
-    },
-  };
-  let response = await checkNewMovies(body);
-
-  if (response.results.length > 0) {
-    var newMovies = await preprocess.processNewMoviesResult(response.results);
-    console.log(newMovies);
-    res.status(200).send(newMovies);
-  } else {
-    res.status(200).send("No New Movies");
-  }
+  const response = await movie.fetchNewMovies(reqTime);
+  res.status(200).send(response);
 });
-
-const checkNewMovies = async (body) => {
-  const response = await notion.databases.query(body);
-  return response;
-};
 
 // Catch-all route for undefined paths
 app.all("*", (req, res) => {
