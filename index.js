@@ -10,7 +10,6 @@ dotenv.config();
 import { authenticate } from "#utils/authenticate.js";
 
 // Dependencies
-import preProcessData from "./preprocess.js";
 import movie from "#modules/n-movies/movies.js";
 import { writeFetchStatus } from "#utils/writeStatus.js";
 import { FETCH_STATUS } from "#utils/constants.js";
@@ -72,43 +71,10 @@ app.get("/test", (req, res) => {
   res.send("Test");
 });
 
-let postReqData;
-
-app.post("/writeToNotion", async (req, res) => {
-  postReqData = req.body;
-  await preparePatchData(postReqData);
-  res.status(200).send("Hello World!");
+app.post("/writeNewMovie", async (req, res) => {
+  await movie.writeNewMovie(req.body);
+  res.status(200).send("Executed Successfully");
 });
-
-const retrievePage = async (pageId) => {
-  const response = await notion.pages.retrieve({ page_id: pageId });
-  console.log(JSON.stringify(response));
-};
-
-const preparePatchData = async (postReqData) => {
-  console.log("Preparing data for patching : ", postReqData["Item ID"]);
-  const data = {
-    page_id: postReqData["Item ID"],
-    cover: {
-      type: "external",
-      external: {
-        url: `${postReqData["Back Drop"]}`,
-      },
-    },
-    icon: {
-      type: "external",
-      external: {
-        url: `${postReqData["Icon"]}`,
-      },
-    },
-    properties: await preprocess.preProcessData({
-      req: postReqData,
-      client: notion,
-    }),
-  };
-  // console.log(JSON.stringify(data));
-  await updatePage(data);
-};
 
 app.post("/fetchNewMovies", async (req, res) => {
   const date = new Date();
