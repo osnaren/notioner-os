@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+        "baseUrl": ".", // Base directory for resolving module paths
+        "paths": {
+            "#modules/*": [
+                "./modules/*"
+            ],
+            "#public/*": [
+                "./public/*"
+            ],
+            "#utils/*": [
+                "./utils/*"
+            ]
+        }
+    },
+    "include": [
+        "**/*.js" // Include all JavaScript files in the project
+    ]
+}
