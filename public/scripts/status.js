@@ -2,11 +2,14 @@ let lastFetched;
 let nextFetch;
 let countdownTimer;
 
+/**
+ * Fetches the last fetch status from the backend or falls back to default values.
+ * @async
+ */
 const fetchData = async () => {
   try {
-    let fetchStatus = await fetch("/data/status.json").then((res) =>
-      res.json()
-    );
+    const data = await fetch("/data/status.json");
+    const fetchStatus = await data.json();
 
     lastFetched = fetchStatus.lastFetched
       ? new Date(fetchStatus.lastFetched)
@@ -22,10 +25,14 @@ const fetchData = async () => {
   }
 };
 
+/**
+ * Sets and updates the countdown timer for the next fetch.
+ */
 const setCountdown = () => {
   const timerElement = document.getElementById("countdownTimer");
   const now = new Date();
   const diff = nextFetch.getTime() - now.getTime();
+
   if (diff > 0) {
     const minutes = Math.floor(diff / 60000);
     const seconds = Math.floor((diff % 60000) / 1000);
@@ -40,27 +47,41 @@ const setCountdown = () => {
   }
 };
 
+/**
+ * Sets the last fetched time on the webpage.
+ */
 const setLastFetched = () => {
   const lastFetchedElement = document.getElementById("lastFetch");
   lastFetchedElement.innerHTML = lastFetched.toLocaleString();
 };
 
+/**
+ * Starts the countdown timer, updating it every second.
+ */
 const startTimer = () => {
   setCountdown(); // Initial call to set the countdown immediately
   countdownTimer = setInterval(setCountdown, 1000);
 };
 
+/**
+ * Initiates the routine of fetching data, setting last fetched time, and starting the timer.
+ * @async
+ */
 const startRoutine = async () => {
   await fetchData();
   setLastFetched();
   startTimer();
 };
 
+/**
+ * Stops the current timer and restarts the routine.
+ */
 const stopTimer = () => {
   clearInterval(countdownTimer);
   startRoutine();
 };
 
+// Start the routine when the DOM content is fully loaded
 document.addEventListener("DOMContentLoaded", () => {
   startRoutine();
 });
