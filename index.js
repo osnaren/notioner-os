@@ -7,6 +7,8 @@ require("dotenv").config();
 // Import custom authentication middleware
 const auth = require("./utils/authenticate");
 const preprocess = require("./preprocess");
+const writeFetchStatus = require("./utils/writeStatus");
+let { FETCH_STATUS } = require("./utils/constants");
 
 // Initialize App
 const app = express();
@@ -45,6 +47,16 @@ app.get("/", (req, res, next) => {
       next(err);
     } else {
       console.log("Sent:", "index.html");
+    }
+  });
+});
+
+app.get("/status", (req, res, next) => {
+  res.sendFile(path.join(__dirname, "public", "status.html"), (err) => {
+    if (err) {
+      next(err);
+    } else {
+      console.log("Sent:", "status.html");
     }
   });
 });
@@ -101,6 +113,11 @@ const updatePage = async (data) => {
 };
 
 app.post("/listenNewMovies", async (req, res) => {
+  const date = new Date();
+  FETCH_STATUS.lastFetched = date.toISOString();
+  FETCH_STATUS.nextFetch = new Date(date.getTime() + 5 * 60000).toISOString();
+
+  writeFetchStatus(FETCH_STATUS.lastFetched, FETCH_STATUS.nextFetch);
   const databaseId = "53999533-c639-467e-b0cb-bec31b241407";
   reqTime = req.body.time;
   let before_time = new Date(reqTime);
