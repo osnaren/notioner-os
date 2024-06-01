@@ -78,7 +78,7 @@ const startRoutine = async () => {
  */
 const stopTimer = () => {
   clearInterval(countdownTimer);
-  startRoutine();
+  // startRoutine();
 };
 
 // Start the routine when the DOM content is fully loaded

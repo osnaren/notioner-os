@@ -76,10 +76,15 @@ app.post("/fetchNewMovies", async (req, res) => {
   const date = new Date();
   FETCH_STATUS.lastFetched = date.toISOString();
   FETCH_STATUS.nextFetch = new Date(date.getTime() + 5 * 60000).toISOString();
-  writeFetchStatus(FETCH_STATUS.lastFetched, FETCH_STATUS.nextFetch);
+  // writeFetchStatus(FETCH_STATUS.lastFetched, FETCH_STATUS.nextFetch);
 
   const reqTime = req.body.time;
   const response = await movie.fetchNewMovies(reqTime);
+  res.status(200).send(response);
+});
+
+app.post("/testNotion", async (req, res) => {
+  const response = await movie.testNotion(req.body);
   res.status(200).send(response);
 });
 

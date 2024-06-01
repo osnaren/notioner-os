@@ -177,7 +177,7 @@ const retrievePageProperty = async (pageId, propertyId) => {
  */
 const updatePageProperties = async (pageId, properties) => {
   try {
-    return await notion.pages.update({ page_id: pageId, properties });
+    return await notion.pages.update({ page_id: pageId, ...properties });
   } catch (error) {
     handleNotionError(error);
   }

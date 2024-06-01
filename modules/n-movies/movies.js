@@ -1,5 +1,10 @@
 import notion from "#utils/notionEndpoints.js";
-import { MOVIES_DB_ID, COLLECTION_DB_ID } from "#utils/constants.js";
+import {
+  MOVIES_DB_ID,
+  COLLECTION_DB_ID,
+  MOVIES_RELATION_ID,
+  SERIES_RELATION_ID,
+} from "#utils/constants.js";
 import { MOVIE_PROPERTIES } from "#modules/n-movies/movie-config.js";
 
 import {
@@ -69,6 +74,7 @@ let movieData;
 
 const writeNewMovie = async (data) => {
   movieData = data;
+  console.log("Movie Data: ", movieData);
   const processedMovieProperties = await processMovieProperties(movieData);
   const pageId = movieData["Item ID"];
   const moviePageData = {
@@ -86,6 +92,7 @@ const writeNewMovie = async (data) => {
     },
     properties: processedMovieProperties,
   };
+  console.log("Processed Movie Properties: ", JSON.stringify(moviePageData));
   await notion.updatePageProperties(pageId, moviePageData);
 };
 
@@ -152,7 +159,7 @@ const handlePropertyType = async (type, value) => {
 const createMovieRelation = async (value) => {
   let relationId;
   switch (value) {
-    case "Movie":
+    case "movie":
       relationId = MOVIES_RELATION_ID;
       break;
     case "Series":
@@ -166,8 +173,8 @@ const createMovieRelation = async (value) => {
 };
 
 const checkAndCreateMovieCollection = async (collectionName) => {
-  const response = await notion.queryDatabase({
-    database_id: COLLECTION_DB_ID,
+  console.log("Checking Collection: ", collectionName);
+  const response = await notion.queryDatabase(COLLECTION_DB_ID, {
     filter: {
       property: "Name",
       title: {
@@ -194,7 +201,13 @@ const checkAndCreateMovieCollection = async (collectionName) => {
   return newCollectionResponse.id;
 };
 
+const testNotion = async (data) => {
+  const response = await notion.retrievePage(data.pageId);
+  return response;
+};
+
 export default {
   fetchNewMovies,
   writeNewMovie,
+  testNotion,
 };
