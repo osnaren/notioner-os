@@ -1,20 +1,37 @@
 {
-  "name": "notioner",
-  "version": "1.0.0",
-  "description": "Manage my Personal Notion",
-  "main": "index.js",
+  "name": "notioner-os",
+  "version": "0.1.0",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node .",
-    "server": "nodemon index.js"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "format": "npx prettier --write ."
   },
-  "author": "osnaren",
-  "license": "ISC",
   "dependencies": {
-    "@notionhq/client": "^2.1.1",
-    "dotenv": "^16.0.2",
-    "express": "^4.18.1",
-    "node-fetch": "^2.6.7",
-    "nodemon": "^2.0.19"
+    "@notionhq/client": "^2.2.15",
+    "@types/styled-components": "^5.1.34",
+    "dotenv": "^16.4.5",
+    "moviedb": "^0.2.12",
+    "next": "14.2.3",
+    "node-fetch": "^3.3.2",
+    "omdbapi": "^4.0.0",
+    "react": "^18",
+    "react-dom": "^18",
+    "styled-components": "^6.1.11",
+    "tmdb-ts": "^1.8.0",
+    "ws": "^8.17.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "@types/ws": "^8.5.10",
+    "eslint": "^8",
+    "eslint-config-next": "14.2.3",
+    "prettier": "3.2.5",
+    "sass": "^1.77.4",
+    "typescript": "^5"
   }
 }
