@@ -1,4 +1,3 @@
-// src/middleware.ts
 import { NextRequest, NextResponse } from "next/server";
 import { verifyAuth } from "./middleware/auth";
 import { PROTECTED_ROUTES } from "@config/constants";

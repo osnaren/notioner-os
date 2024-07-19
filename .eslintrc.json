@@ -53,6 +53,6 @@
       }
     ],
     "prefer-const": "error",
-    "import/no-anonymous-default-export": "error"
+    "import/no-anonymous-default-export": "off"
   }
 }

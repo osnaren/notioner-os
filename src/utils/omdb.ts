@@ -1,13 +1,13 @@
-import fetch from 'node-fetch';
+import fetch from "node-fetch";
 
-import { formatMovieData } from '@utils/movie-helpers';
-import { MovieTitleYear, OMDBAPIResponse, OMDBSuccessResponse, OMDBTransformedResponse } from '@ctypes/movie-type';
+import { formatMovieData } from "@utils/movie-helpers";
+import { MovieTitleYear, OMDBAPIResponse, OMDBSuccessResponse, OMDBTransformedResponse } from "@ctypes/movie-type";
 
 const OMDB_API_KEY = process.env.OMDB_API_KEY as string;
 const OMDB_API_URL = process.env.OMDB_API_URL as string;
 
 if (!OMDB_API_KEY || !OMDB_API_URL) {
-  throw new Error('OMDB API key and URL must be provided');
+  throw new Error("OMDB API key and URL must be provided");
 }
 
 const OMDB_API_ENDPOINT = `${OMDB_API_URL}?apikey=${OMDB_API_KEY}`;
@@ -22,7 +22,7 @@ export const getMovieDataByTitle = async ({ title, year }: MovieTitleYear): Prom
   const omdbResponse = await fetch(omdbUrl);
   const omdbData = (await omdbResponse.json()) as OMDBAPIResponse;
 
-  if (omdbData.Response === 'False') {
+  if (omdbData.Response === "False") {
     throw new Error(omdbData.Error);
   }
 
@@ -41,7 +41,7 @@ export const getMovieDataById = async (imdbID: string): Promise<OMDBTransformedR
   const omdbResponse = await fetch(omdbUrl);
   const omdbData = (await omdbResponse.json()) as OMDBAPIResponse;
 
-  if (omdbData.Response === 'False') {
+  if (omdbData.Response === "False") {
     throw new Error(omdbData.Error);
   }
 

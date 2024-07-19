@@ -1,4 +1,4 @@
-import { Client, isNotionClientError } from '@notionhq/client';
+import { Client, isNotionClientError } from "@notionhq/client";
 import {
   AppendBlockChildrenParameters,
   AppendBlockChildrenResponse,
@@ -34,12 +34,12 @@ import {
   GetUserParameters,
   ListBlockChildrenParameters,
   UserObjectResponse,
-} from '@notionhq/client/build/src/api-endpoints';
+} from "@notionhq/client/build/src/api-endpoints";
 
 const AUTH_TOKEN = process.env.NOTION_AUTH_TOKEN as string;
 
 if (!AUTH_TOKEN) {
-  throw new Error('Notion API token must be provided');
+  throw new Error("Notion API token must be provided");
 }
 
 // Initialize Notion client
@@ -50,17 +50,17 @@ const notion = new Client({
 // Define error handling function
 const handleNotionError = (error: unknown): void => {
   if (isNotionClientError(error)) {
-    const stackLines = error.stack?.split('\n');
+    const stackLines = error.stack?.split("\n");
     if (stackLines && stackLines.length > 1) {
       const callingFunctionLine = stackLines[1].trim();
-      const callingFunctionName = callingFunctionLine.substring(callingFunctionLine.lastIndexOf(' ') + 1);
+      const callingFunctionName = callingFunctionLine.substring(callingFunctionLine.lastIndexOf(" ") + 1);
       console.error(`Error in calling function: ${callingFunctionName}`);
     } else {
-      console.error('Unknown calling function');
+      console.error("Unknown calling function");
     }
-    console.error('Notion API error:', error.message);
+    console.error("Notion API error:", error.message);
   } else {
-    console.error('Unexpected error:', error);
+    console.error("Unexpected error:", error);
   }
   throw error;
 };
@@ -77,8 +77,8 @@ const handleNotionError = (error: unknown): void => {
  * Notion API Reference: https://developers.notion.com/reference/patch-block-children
  */
 export const appendBlockChildren = async (
-  blockId: AppendBlockChildrenParameters['block_id'],
-  children: AppendBlockChildrenParameters['children']
+  blockId: AppendBlockChildrenParameters["block_id"],
+  children: AppendBlockChildrenParameters["children"]
 ): Promise<AppendBlockChildrenResponse | undefined> => {
   try {
     return await notion.blocks.children.append({ block_id: blockId, children });
@@ -232,7 +232,7 @@ export const updatePageProperties = async (
  *
  * Notion API Reference: https://developers.notion.com/reference/archive-a-page
  */
-export const archivePage = async (pageId: UpdatePageParameters['page_id']): Promise<UpdatePageResponse | undefined> => {
+export const archivePage = async (pageId: UpdatePageParameters["page_id"]): Promise<UpdatePageResponse | undefined> => {
   try {
     return await notion.pages.update({ page_id: pageId, archived: true });
   } catch (error) {

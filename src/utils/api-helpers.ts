@@ -13,17 +13,17 @@ interface CreateResponseOptions {
  */
 export const createResponse = (
   body: ResponseBody,
-  { status, headers = { 'Content-Type': 'application/json' } }: CreateResponseOptions
+  { status, headers = { "Content-Type": "application/json" } }: CreateResponseOptions
 ): Response => {
   const responseHeaders = new Headers(headers);
   let responseBody: string;
 
-  if (typeof body === 'string') {
+  if (typeof body === "string") {
     responseBody = body;
   } else if (body) {
     responseBody = JSON.stringify(body);
   } else {
-    responseBody = '';
+    responseBody = "";
   }
 
   return new Response(responseBody, {

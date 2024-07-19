@@ -55,6 +55,7 @@ export async function verifyAuth(request: NextRequest) {
   const authToken = getAuthToken(request);
 
   const isAuthorized = isAuthorizedRequest(hostname, authToken, requestIp);
+  console.log("isAuthorized", isAuthorized);
 
   if (!isAuthorized) {
     return NextResponse.rewrite(new URL("/unauthorized", request.url));

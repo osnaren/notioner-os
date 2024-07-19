@@ -10,7 +10,7 @@ import {
   ExternalFilePropertyItemObjectResponse,
   RichTextPropertyItemObjectResponse,
   UrlPropertyItemObjectResponse,
-} from '@ctypes/movie-type';
+} from "@ctypes/movie-type";
 
 /**
  * Creates a number property for a Notion page.
@@ -18,10 +18,10 @@ import {
  * @param {string} propertyId - The ID of the property.
  * @returns {NumberPropertyItemObjectResponse} - The Notion number property.
  */
-const createNumber = (numValue: string | number, propertyId: string = ''): NumberPropertyItemObjectResponse => {
+const createNumber = (numValue: string | number, propertyId: string = ""): NumberPropertyItemObjectResponse => {
   return {
-    type: 'number',
-    number: numValue === '#NUM!' ? null : Number.parseFloat(numValue.toString()),
+    type: "number",
+    number: numValue === "#NUM!" ? null : Number.parseFloat(numValue.toString()),
     id: propertyId,
   };
 };
@@ -32,9 +32,9 @@ const createNumber = (numValue: string | number, propertyId: string = ''): Numbe
  * @param {string} propertyId - The ID of the property.
  * @returns {StatusPropertyItemObjectResponse} - The Notion status property.
  */
-const createStatus = (statusValue: string, propertyId: string = ''): StatusPropertyItemObjectResponse => {
+const createStatus = (statusValue: string, propertyId: string = ""): StatusPropertyItemObjectResponse => {
   return {
-    type: 'status',
+    type: "status",
     status: { name: statusValue },
     id: propertyId,
   };
@@ -49,15 +49,15 @@ const createStatus = (statusValue: string, propertyId: string = ''): StatusPrope
  */
 const createDate = (
   startDate: string,
-  endDate: string = '',
-  propertyId: string = ''
+  endDate: string = "",
+  propertyId: string = ""
 ): DatePropertyItemObjectResponse => {
   return {
-    type: 'date',
+    type: "date",
     date: {
-      start: startDate.split('/').reverse().join('-'),
-      end: endDate.split('/').reverse().join('-') || null,
-      time_zone: 'Asia/Kolkata',
+      start: startDate.split("/").reverse().join("-"),
+      end: endDate.split("/").reverse().join("-") || null,
+      time_zone: "Asia/Kolkata",
     },
     id: propertyId,
   };
@@ -70,12 +70,12 @@ const createDate = (
  * @param {string} propertyId - The ID of the property.
  * @returns {FilesPropertyItemObjectResponse} - The Notion files property.
  */
-const createFiles = (fileUrl: string, fileTitle: string, propertyId: string = ''): FilesPropertyItemObjectResponse => {
+const createFiles = (fileUrl: string, fileTitle: string, propertyId: string = ""): FilesPropertyItemObjectResponse => {
   return {
-    type: 'files',
+    type: "files",
     files: [
       {
-        type: 'external',
+        type: "external",
         name: fileTitle,
         external: {
           url: fileUrl,
@@ -93,7 +93,7 @@ const createFiles = (fileUrl: string, fileTitle: string, propertyId: string = ''
  */
 const createExternalFile = (externalUrl: string): ExternalFilePropertyItemObjectResponse => {
   return {
-    type: 'external',
+    type: "external",
     external: {
       url: externalUrl,
     },
@@ -106,9 +106,9 @@ const createExternalFile = (externalUrl: string): ExternalFilePropertyItemObject
  * @param {string} propertyId - The ID of the property.
  * @returns {UrlPropertyItemObjectResponse} - The Notion url property.
  */
-const createUrl = (url: string, propertyId: string = ''): UrlPropertyItemObjectResponse => {
+const createUrl = (url: string, propertyId: string = ""): UrlPropertyItemObjectResponse => {
   return {
-    type: 'url',
+    type: "url",
     url,
     id: propertyId,
   };
@@ -120,9 +120,9 @@ const createUrl = (url: string, propertyId: string = ''): UrlPropertyItemObjectR
  * @param {string} propertyId - The ID of the property.
  * @returns {RelationPropertyItemObjectResponse} - The Notion relation property.
  */
-const createRelation = (relationId: string, propertyId: string = ''): RelationPropertyItemObjectResponse => {
+const createRelation = (relationId: string, propertyId: string = ""): RelationPropertyItemObjectResponse => {
   return {
-    type: 'relation',
+    type: "relation",
     relation: [{ id: relationId }],
     id: propertyId,
   };
@@ -134,9 +134,9 @@ const createRelation = (relationId: string, propertyId: string = ''): RelationPr
  * @param {string} propertyId - The ID of the property.
  * @returns {SelectPropertyItemObjectResponse} - The Notion select property.
  */
-const createSelect = (selectOption: string, propertyId: string = ''): SelectPropertyItemObjectResponse => {
+const createSelect = (selectOption: string, propertyId: string = ""): SelectPropertyItemObjectResponse => {
   return {
-    type: 'select',
+    type: "select",
     select: { name: selectOption },
     id: propertyId,
   };
@@ -148,11 +148,11 @@ const createSelect = (selectOption: string, propertyId: string = ''): SelectProp
  * @param {string} propertyId - The ID of the property.
  * @returns {MultiSelectPropertyItemObjectResponse} - The Notion multi-select property.
  */
-const createMultiSelect = (selectOptions: string, propertyId: string = ''): MultiSelectPropertyItemObjectResponse => {
+const createMultiSelect = (selectOptions: string, propertyId: string = ""): MultiSelectPropertyItemObjectResponse => {
   return {
     id: propertyId,
-    type: 'multi_select',
-    multi_select: selectOptions.split(',').map((item) => ({ name: item.trim() })),
+    type: "multi_select",
+    multi_select: selectOptions.split(",").map((item) => ({ name: item.trim() })),
   };
 };
 
@@ -162,12 +162,12 @@ const createMultiSelect = (selectOptions: string, propertyId: string = ''): Mult
  * @param {string} propertyId - The ID of the property.
  * @returns {RichTextPropertyItemObjectResponse} - The Notion rich text property.
  */
-const createRichText = (richTextContent: string, propertyId: string = ''): RichTextPropertyItemObjectResponse => {
+const createRichText = (richTextContent: string, propertyId: string = ""): RichTextPropertyItemObjectResponse => {
   return {
-    type: 'rich_text',
+    type: "rich_text",
     rich_text: [
       {
-        type: 'text',
+        type: "text",
         text: {
           content: richTextContent,
           link: null,
@@ -185,21 +185,23 @@ const createRichText = (richTextContent: string, propertyId: string = ''): RichT
  */
 const createTitle = (titleContent: string): TitlePropertyItemObjectResponse => {
   return {
-    type: 'title',
-    title: [{
-      type: 'text',
-      text: {
-        content: titleContent,
-        link: null,
+    type: "title",
+    title: [
+      {
+        type: "text",
+        text: {
+          content: titleContent,
+          link: null,
+        },
       },
-    }],
-    id: 'title',
+    ],
+    id: "title",
   };
 };
 
 const createDatabaseId = (databaseId: string) => {
   return {
-    type: 'database_id',
+    type: "database_id",
     database_id: databaseId,
   };
 };

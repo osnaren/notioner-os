@@ -1,8 +1,8 @@
-import { getMovieDataByTitle } from '@utils/omdb';
-import { getTMDBMovieDataByIMDBId } from '@utils/tmdb';
+import { getMovieDataByTitle } from "@utils/omdb";
+import { getTMDBMovieDataByIMDBId } from "@utils/tmdb";
 
-import { gatherMovieData } from '@api/movie/utils';
-import { createResponse } from '@utils/api-helpers';
+import { gatherMovieData } from "@api/movie/utils";
+import { createResponse } from "@utils/api-helpers";
 
 // Handler for POST requests
 export const POST = async (req: Request) => {
@@ -15,6 +15,6 @@ export const POST = async (req: Request) => {
     // return createResponse({ OMDBResponse, TMDBResponse }, { status: 200 });
     return createResponse(response, { status: 200 });
   } catch (error) {
-    return createResponse({ error: 'Failed to retrieve movie data' }, { status: 500 });
+    return createResponse({ error: "Failed to retrieve movie data" }, { status: 500 });
   }
 };
