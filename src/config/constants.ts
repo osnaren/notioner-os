@@ -9,3 +9,4 @@ export const MOVIES_RELATION_ID = "58acc6ff1d8d4154a95d26219a2a1777";
 export const SERIES_RELATION_ID = "d3982225de604015975d11fe0862e716";
 
 export const PROTECTED_ROUTES = ["/about", "/api/*"];
+export const ALLOWED_HOSTS = ["localhost", "127.0.0.1", "vercel.app"];
