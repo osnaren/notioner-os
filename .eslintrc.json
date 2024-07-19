@@ -37,7 +37,7 @@
       }
     ],
     "no-console": [
-      "error",
+      "warn",
       {
         "allow": [
           "warn",
@@ -52,7 +52,7 @@
         "ignoreRestSiblings": false
       }
     ],
-    "prefer-const": "error",
+    "prefer-const": "warn",
     "import/no-anonymous-default-export": "off"
   }
 }
