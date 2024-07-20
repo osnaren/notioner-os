@@ -53,6 +53,17 @@ export const theme = {
       md: "calc(var(--radius) - 2px)",
       sm: "calc(var(--radius) - 4px)",
     },
+    fontFamily: {
+      sans: ["var(--font-sans)"],
+      serif: ["var(--font-serif)"],
+      sansSerif: ["var(--font-sans-serif)"],
+      rounded: ["var(--font-rounded)"],
+      openSans: ["var(--font-open-sans)"],
+      brush: ["var(--font-brush)"],
+      display: ["var(--font-display)"],
+      mono: ["var(--font-mono-sans)", "monospace"],
+      monoSerif: ["var(--font-mono-serif)", "monospace"],
+    },
     keyframes: {
       "accordion-down": {
         from: { height: "0" },

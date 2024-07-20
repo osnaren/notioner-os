@@ -48,7 +48,10 @@
       ],
       "@ctypes/*": [
         "src/types/*"
-      ]
+      ],
+      "@cui/*": [
+        "src/custom/*"
+      ],
     },
   },
   "include": [

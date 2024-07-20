@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { SparklesCore } from "@/components/ui/sparkles";
+import { SparklesCore } from "@cui/components/ui/sparkles";
 
 const SparklesPreview = () => {
   return (
