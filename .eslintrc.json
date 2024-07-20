@@ -24,7 +24,8 @@
   "ignorePatterns": [
     "node_modules/",
     "build/",
-    "dist/"
+    "dist/",
+    "src/custom/"
   ],
   "rules": {
     "@typescript-eslint/no-explicit-any": "warn",
