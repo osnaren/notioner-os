@@ -1,7 +1,7 @@
 import fetch from "node-fetch";
 
 import { formatMovieData } from "@utils/movie-helpers";
-import { MovieTitleYear, OMDBAPIResponse, OMDBSuccessResponse, OMDBTransformedResponse } from "@ctypes/movie-type";
+import { MovieTitleYear, OMDBAPIResponse, OMDBTransformedResponse } from "@ctypes/movie-type";
 
 const OMDB_API_KEY = process.env.OMDB_API_KEY as string;
 const OMDB_API_URL = process.env.OMDB_API_URL as string;

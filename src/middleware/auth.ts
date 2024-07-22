@@ -49,13 +49,12 @@ const validateToken = (token: string): boolean => {
  * @param {NextRequest} request - The request object containing URL, cookies, and headers.
  * @return {Promise<NextResponse>} A Promise that resolves to the next response.
  */
-export async function verifyAuth(request: NextRequest) {
+export function verifyAuth(request: NextRequest) {
   const requestIp = request.headers.get("x-forwarded-for") || request.ip || "127.0.0.1";
   const { hostname } = new URL(request.url);
   const authToken = getAuthToken(request);
 
   const isAuthorized = isAuthorizedRequest(hostname, authToken, requestIp);
-  console.log("isAuthorized", isAuthorized);
 
   if (!isAuthorized) {
     return NextResponse.rewrite(new URL("/unauthorized", request.url));

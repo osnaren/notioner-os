@@ -2,13 +2,19 @@ import { NextRequest, NextResponse } from "next/server";
 import { verifyAuth } from "./middleware/auth";
 import { PROTECTED_ROUTES } from "@config/constants";
 
-export async function middleware(req: NextRequest) {
+/**
+ * Middleware function to check if the request path matches any protected routes and perform authentication check.
+ *
+ * @param {NextRequest} req - The request object
+ * @return {NextResponse} The next response object
+ */
+export function middleware(req: NextRequest): NextResponse {
   const url = req.nextUrl.clone();
 
   // Check if the request path matches any of the protected routes
   if (PROTECTED_ROUTES.some((route) => url.pathname.startsWith(route))) {
     // Perform authentication check
-    const authResult = await verifyAuth(req);
+    const authResult = verifyAuth(req);
     if (authResult !== NextResponse.next()) {
       return authResult;
     }

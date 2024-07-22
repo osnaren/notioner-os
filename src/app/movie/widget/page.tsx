@@ -40,10 +40,16 @@ const MovieForm: React.FC = () => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const onSubmit = async (data: z.infer<typeof movieFormSchema>) => {
+  /**
+   * Submits the form data to the server to add a new movie.
+   *
+   * @param {z.infer<typeof movieFormSchema>} data - The form data containing the movie title and year.
+   * @return {void} This function does not return anything.
+   */
+  const onSubmit = (data: z.infer<typeof movieFormSchema>): void => {
     setIsSubmitting(true);
     createRequest("post", "/api/movie/write", data)
-      .then((response) => {
+      .then(() => {
         toast.success("Movie added successfully!");
       })
       .catch(() => {
@@ -57,64 +63,62 @@ const MovieForm: React.FC = () => {
   };
 
   return (
-    <>
-      <Card className="w-[350px] m-8">
-        <CardHeader>
-          <CardTitle className="flex items-center justify-between gap-2">
-            Add Movie
-            <HoverCard>
-              <HoverCardTrigger>
-                <MdOutlineInfo />
-              </HoverCardTrigger>
-              <HoverCardContent className="font-mono font-light text-sm" side="right">
-                Enter the title and year of the movie. We&lsquo;ll add it to the Notion Cinescape.
-              </HoverCardContent>
-            </HoverCard>
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-              <FormField
-                control={form.control}
-                name="title"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="flex items-center gap-2">
-                      <MdOutlineMovieFilter size={20} /> Movie Title
-                    </FormLabel>
-                    <FormControl>
-                      <Input placeholder="Enter Title ..." {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+    <Card className="w-[350px] m-8">
+      <CardHeader>
+        <CardTitle className="flex items-center justify-between gap-2">
+          Add Movie
+          <HoverCard>
+            <HoverCardTrigger>
+              <MdOutlineInfo />
+            </HoverCardTrigger>
+            <HoverCardContent className="font-mono font-light text-sm" side="right">
+              Enter the title and year of the movie. We&lsquo;ll add it to the Notion Cinescape.
+            </HoverCardContent>
+          </HoverCard>
+        </CardTitle>
+      </CardHeader>
+      <CardContent>
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+            <FormField
+              control={form.control}
+              name="title"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="flex items-center gap-2">
+                    <MdOutlineMovieFilter size={20} /> Movie Title
+                  </FormLabel>
+                  <FormControl>
+                    <Input placeholder="Enter Title ..." {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
-              <FormField
-                control={form.control}
-                name="year"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="flex items-center gap-2">
-                      <BsCalendarDate size={16} /> Year
-                    </FormLabel>
-                    <FormControl>
-                      <Input placeholder="Enter Release Year ..." {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <Button type="submit" className="gap-2" disabled={isSubmitting || !form.formState.isValid}>
-                {isSubmitting && <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />}
-                Submit
-              </Button>
-            </form>
-          </Form>
-        </CardContent>
-      </Card>
-    </>
+            <FormField
+              control={form.control}
+              name="year"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="flex items-center gap-2">
+                    <BsCalendarDate size={16} /> Year
+                  </FormLabel>
+                  <FormControl>
+                    <Input placeholder="Enter Release Year ..." {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <Button type="submit" className="gap-2" disabled={isSubmitting || !form.formState.isValid}>
+              {isSubmitting && <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />}
+              Submit
+            </Button>
+          </form>
+        </Form>
+      </CardContent>
+    </Card>
   );
 };
 
