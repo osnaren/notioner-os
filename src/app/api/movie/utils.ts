@@ -100,7 +100,7 @@ export const processMovieProperties = async (movieData: MovieData): Promise<Noti
       const moviePropertyTypeValue = await handlePropertyType(moviePropertyKey, propertyId, propertyType, movieData);
       movieProperties[moviePropertyKey] = moviePropertyTypeValue;
     } else {
-      movieProperties.delete(moviePropertyKey);
+      delete movieProperties[moviePropertyKey];
     }
   }
   return movieProperties as NotionMovieProperties;
