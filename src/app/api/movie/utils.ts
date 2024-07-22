@@ -29,6 +29,12 @@ import {
 } from "@utils/notion-helpers";
 import { MOVIE_PROPERTIES, prepareMovieData } from "@utils/movie-helpers";
 
+/**
+ * Asynchronously gathers movie data by title and year using the OMDB and TMDB APIs.
+ *
+ * @param {MovieTitleYear} titleYear - An object containing the movie title and year.
+ * @return {Promise<MovieData>} A promise that resolves to the prepared movie data.
+ */
 export const gatherMovieData = async ({ title, year }: MovieTitleYear) => {
   const omdbMovieData = await getMovieDataByTitle({ title, year });
 
@@ -38,15 +44,16 @@ export const gatherMovieData = async ({ title, year }: MovieTitleYear) => {
   return movieData;
 };
 
-/**
- * Prepare movie data with the required properties
- * @param {OMDBTransformedResponse} omdbData - Transformed movie data from OMDB API
- * @param {MovieDetails} tmdbData - Movie data from TMDB API
- * @returns {MovieData} - Movie data with required properties
- */
-
 let globalMovieData: MovieData = {} as MovieData;
 let globalItemID = "";
+
+/**
+ * Updates a Notion page with the given movie data.
+ *
+ * @param {MovieData} movieData - The movie data to update the page with.
+ * @param {string} itemID - The ID of the page to update. If not provided, a new page will be created.
+ * @return {Promise<UpdatePageResponse | CreatePageResponse>} A promise that resolves to the response of the update or create operation.
+ */
 export const updateNotionPage = async (movieData: MovieData, itemID: string) => {
   globalMovieData = movieData;
   globalItemID = itemID;
@@ -93,7 +100,7 @@ export const processMovieProperties = async (movieData: MovieData): Promise<Noti
       const moviePropertyTypeValue = await handlePropertyType(moviePropertyKey, propertyId, propertyType, movieData);
       movieProperties[moviePropertyKey] = moviePropertyTypeValue;
     } else {
-      delete movieProperties[moviePropertyKey];
+      movieProperties.delete(moviePropertyKey);
     }
   }
   return movieProperties as NotionMovieProperties;

@@ -85,6 +85,7 @@ export const appendBlockChildren = async (
   } catch (error) {
     handleNotionError(error);
   }
+  return undefined;
 };
 
 /**
@@ -101,6 +102,7 @@ export const retrieveBlock = async (blockId: GetBlockParameters): Promise<GetBlo
   } catch (error) {
     handleNotionError(error);
   }
+  return undefined;
 };
 
 /**
@@ -119,12 +121,12 @@ export const retrieveBlockChildren = async (
   } catch (error) {
     handleNotionError(error);
   }
+  return undefined;
 };
 
 /**
  * Updates a specific block.
- * @param {UpdateBlockParameters['block_id']} blockId - The ID of the block to update.
- * @param {UpdateBlockParameters} block - The block object with updated properties.
+ * @param {UpdateBlockParameters} blockData - The data object for the block to update.
  * @returns {Promise<UpdateBlockResponse | undefined>} The updated block object as returned by the Notion API.
  * @throws {Error} Throws an error if the Notion API call fails.
  *
@@ -136,6 +138,7 @@ export const updateBlock = async (blockData: UpdateBlockParameters): Promise<Upd
   } catch (error) {
     handleNotionError(error);
   }
+  return undefined;
 };
 
 /**
@@ -152,6 +155,7 @@ export const deleteBlock = async (blockId: DeleteBlockParameters): Promise<Delet
   } catch (error) {
     handleNotionError(error);
   }
+  return undefined;
 };
 
 // PAGES API
@@ -170,6 +174,7 @@ export const createPage = async (pageData: CreatePageParameters): Promise<Create
   } catch (error) {
     handleNotionError(error);
   }
+  return undefined;
 };
 
 /**
@@ -186,6 +191,7 @@ export const retrievePage = async (pageId: GetPageParameters): Promise<GetPageRe
   } catch (error) {
     handleNotionError(error);
   }
+  return undefined;
 };
 
 /**
@@ -204,6 +210,7 @@ export const retrievePageProperty = async (
   } catch (error) {
     handleNotionError(error);
   }
+  return undefined;
 };
 
 /**
@@ -222,6 +229,7 @@ export const updatePageProperties = async (
   } catch (error) {
     handleNotionError(error);
   }
+  return undefined;
 };
 
 /**
@@ -238,6 +246,7 @@ export const archivePage = async (pageId: UpdatePageParameters["page_id"]): Prom
   } catch (error) {
     handleNotionError(error);
   }
+  return undefined;
 };
 
 // DATABASES API
@@ -258,6 +267,7 @@ export const createDatabase = async (
   } catch (error) {
     handleNotionError(error);
   }
+  return undefined;
 };
 
 /**
@@ -274,6 +284,7 @@ export const queryDatabase = async (queryData: QueryDatabaseParameters): Promise
   } catch (error) {
     handleNotionError(error);
   }
+  return undefined;
 };
 
 /**
@@ -290,6 +301,7 @@ export const retrieveDatabase = async (databaseId: GetDatabaseParameters): Promi
   } catch (error) {
     handleNotionError(error);
   }
+  return undefined;
 };
 
 /**
@@ -308,6 +320,7 @@ export const updateDatabase = async (
   } catch (error) {
     handleNotionError(error);
   }
+  return undefined;
 };
 
 // USERS API
@@ -325,6 +338,7 @@ export const listAllUsers = async (): Promise<ListUsersResponse | undefined> => 
   } catch (error) {
     handleNotionError(error);
   }
+  return undefined;
 };
 
 /**
@@ -341,6 +355,7 @@ export const retrieveUser = async (userId: GetUserParameters): Promise<UserObjec
   } catch (error) {
     handleNotionError(error);
   }
+  return undefined;
 };
 
 /**
@@ -356,6 +371,7 @@ export const retrieveBotUser = async (): Promise<UserObjectResponse | undefined>
   } catch (error) {
     handleNotionError(error);
   }
+  return undefined;
 };
 
 // COMMENTS API
@@ -376,6 +392,7 @@ export const createComment = async (
   } catch (error) {
     handleNotionError(error);
   }
+  return undefined;
 };
 
 /**
@@ -392,6 +409,7 @@ export const retrieveComments = async (blockId: ListCommentsParameters): Promise
   } catch (error) {
     handleNotionError(error);
   }
+  return undefined;
 };
 
 // SEARCH API
@@ -410,6 +428,7 @@ export const search = async (query: SearchParameters): Promise<SearchResponse | 
   } catch (error) {
     handleNotionError(error);
   }
+  return undefined;
 };
 
 export default {
