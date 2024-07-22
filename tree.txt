@@ -1,0 +1,38 @@
+notioner-os/
+├── config/
+│   └── index.ts
+├── middleware/
+│   └── auth.ts
+├── next-env.d.ts
+├── next.config.mjs
+├── package-lock.json
+├── package.json
+├── public/
+│   ├── assets/
+│   │   ├── images/
+│   │   │   └── os_logo.png
+│   │   ├── sounds/
+│   │   └── videos/
+│   └── favicon.ico
+├── README.md
+├── src/
+│   ├── app/
+│   │   ├── api/
+│   │   │   └── movies/
+│   │   │       ├── route.ts
+│   │   │       └── utils.ts
+│   │   └── components/
+│   │       ├── home/
+│   │       ├── shared/
+│   │       └── status/
+│   ├── index.ts
+│   ├── layout.tsx
+│   └── page.tsx
+├── tests/
+├── tree.txt
+├── tsconfig.json
+└── utils/
+    ├── helpers.ts
+    ├── notion.ts
+    ├── omdb.ts
+    └── tmdb.ts
