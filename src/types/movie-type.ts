@@ -348,7 +348,6 @@ export type NotionProperties =
   | "email"
   | "number"
   | "files"
-  | "url"
   | "relation"
   | "select"
   | "multi_select"

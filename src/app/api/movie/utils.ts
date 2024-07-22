@@ -46,7 +46,7 @@ export const gatherMovieData = async ({ title, year }: MovieTitleYear) => {
  */
 
 let globalMovieData: MovieData = {} as MovieData;
-let globalItemID: string = "";
+let globalItemID = "";
 export const updateNotionPage = async (movieData: MovieData, itemID: string) => {
   globalMovieData = movieData;
   globalItemID = itemID;

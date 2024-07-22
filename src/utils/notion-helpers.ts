@@ -18,7 +18,7 @@ import {
  * @param {string} propertyId - The ID of the property.
  * @returns {NumberPropertyItemObjectResponse} - The Notion number property.
  */
-const createNumber = (numValue: string | number, propertyId: string = ""): NumberPropertyItemObjectResponse => {
+const createNumber = (numValue: string | number, propertyId = ""): NumberPropertyItemObjectResponse => {
   return {
     type: "number",
     number: numValue === "#NUM!" ? null : Number.parseFloat(numValue.toString()),
@@ -32,7 +32,7 @@ const createNumber = (numValue: string | number, propertyId: string = ""): Numbe
  * @param {string} propertyId - The ID of the property.
  * @returns {StatusPropertyItemObjectResponse} - The Notion status property.
  */
-const createStatus = (statusValue: string, propertyId: string = ""): StatusPropertyItemObjectResponse => {
+const createStatus = (statusValue: string, propertyId = ""): StatusPropertyItemObjectResponse => {
   return {
     type: "status",
     status: { name: statusValue },
@@ -49,8 +49,8 @@ const createStatus = (statusValue: string, propertyId: string = ""): StatusPrope
  */
 const createDate = (
   startDate: string,
-  endDate: string = "",
-  propertyId: string = ""
+  endDate = "",
+  propertyId = ""
 ): DatePropertyItemObjectResponse => {
   return {
     type: "date",
@@ -70,7 +70,7 @@ const createDate = (
  * @param {string} propertyId - The ID of the property.
  * @returns {FilesPropertyItemObjectResponse} - The Notion files property.
  */
-const createFiles = (fileUrl: string, fileTitle: string, propertyId: string = ""): FilesPropertyItemObjectResponse => {
+const createFiles = (fileUrl: string, fileTitle: string, propertyId = ""): FilesPropertyItemObjectResponse => {
   return {
     type: "files",
     files: [
@@ -106,7 +106,7 @@ const createExternalFile = (externalUrl: string): ExternalFilePropertyItemObject
  * @param {string} propertyId - The ID of the property.
  * @returns {UrlPropertyItemObjectResponse} - The Notion url property.
  */
-const createUrl = (url: string, propertyId: string = ""): UrlPropertyItemObjectResponse => {
+const createUrl = (url: string, propertyId = ""): UrlPropertyItemObjectResponse => {
   return {
     type: "url",
     url,
@@ -120,7 +120,7 @@ const createUrl = (url: string, propertyId: string = ""): UrlPropertyItemObjectR
  * @param {string} propertyId - The ID of the property.
  * @returns {RelationPropertyItemObjectResponse} - The Notion relation property.
  */
-const createRelation = (relationId: string, propertyId: string = ""): RelationPropertyItemObjectResponse => {
+const createRelation = (relationId: string, propertyId = ""): RelationPropertyItemObjectResponse => {
   return {
     type: "relation",
     relation: [{ id: relationId }],
@@ -134,7 +134,7 @@ const createRelation = (relationId: string, propertyId: string = ""): RelationPr
  * @param {string} propertyId - The ID of the property.
  * @returns {SelectPropertyItemObjectResponse} - The Notion select property.
  */
-const createSelect = (selectOption: string, propertyId: string = ""): SelectPropertyItemObjectResponse => {
+const createSelect = (selectOption: string, propertyId = ""): SelectPropertyItemObjectResponse => {
   return {
     type: "select",
     select: { name: selectOption },
@@ -148,7 +148,7 @@ const createSelect = (selectOption: string, propertyId: string = ""): SelectProp
  * @param {string} propertyId - The ID of the property.
  * @returns {MultiSelectPropertyItemObjectResponse} - The Notion multi-select property.
  */
-const createMultiSelect = (selectOptions: string, propertyId: string = ""): MultiSelectPropertyItemObjectResponse => {
+const createMultiSelect = (selectOptions: string, propertyId = ""): MultiSelectPropertyItemObjectResponse => {
   return {
     id: propertyId,
     type: "multi_select",
@@ -162,7 +162,7 @@ const createMultiSelect = (selectOptions: string, propertyId: string = ""): Mult
  * @param {string} propertyId - The ID of the property.
  * @returns {RichTextPropertyItemObjectResponse} - The Notion rich text property.
  */
-const createRichText = (richTextContent: string, propertyId: string = ""): RichTextPropertyItemObjectResponse => {
+const createRichText = (richTextContent: string, propertyId = ""): RichTextPropertyItemObjectResponse => {
   return {
     type: "rich_text",
     rich_text: [
