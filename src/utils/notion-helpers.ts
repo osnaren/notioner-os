@@ -47,11 +47,7 @@ const createStatus = (statusValue: string, propertyId = ""): StatusPropertyItemO
  * @param {string} propertyId - The ID of the property.
  * @returns {DatePropertyItemObjectResponse} - The Notion date property.
  */
-const createDate = (
-  startDate: string,
-  endDate = "",
-  propertyId = ""
-): DatePropertyItemObjectResponse => {
+const createDate = (startDate: string, endDate = "", propertyId = ""): DatePropertyItemObjectResponse => {
   return {
     type: "date",
     date: {
