@@ -9,8 +9,6 @@ export const metadata: Metadata = {
 
 export default function MovieLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="h-full w-full flex flex-col items-center justify-center overflow-hidden rounded-md">
-      {children}
-    </div>
+    <div className="h-full w-full flex flex-col items-center justify-center overflow-hidden rounded-md">{children}</div>
   );
 }
