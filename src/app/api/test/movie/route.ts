@@ -1,5 +1,5 @@
-import { getMovieDataByTitle } from "@utils/omdb";
-import { getTMDBMovieDataByIMDBId } from "@utils/tmdb";
+// import { getMovieDataByTitle } from "@utils/omdb";
+// import { getTMDBMovieDataByIMDBId } from "@utils/tmdb";
 
 import { gatherMovieData } from "@api/movie/utils";
 import { createResponse } from "@utils/api-helpers";
