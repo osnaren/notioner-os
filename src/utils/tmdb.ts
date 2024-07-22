@@ -6,6 +6,12 @@ const tmdb = new TMDB(TMDB_ACCESS_TOKEN);
 
 export default tmdb;
 
+/**
+ * Retrieves TMDB movie data by IMDB ID.
+ *
+ * @param {string} imdbID - The IMDB ID of the movie.
+ * @return {MovieDetails | undefined} The full TMDB movie data.
+ */
 export const getTMDBMovieDataByIMDBId = async (imdbID: string) => {
   const tmdbData = await tmdb.find.byId(imdbID, { external_source: "imdb_id" });
   const tmdbMovie = tmdbData.movie_results[0];
@@ -15,7 +21,7 @@ export const getTMDBMovieDataByIMDBId = async (imdbID: string) => {
   return fullTmdbData;
 };
 
-const sample = {
+const _sample = {
   movie_results: [
     {
       backdrop_path: "/u2dKiAl7UQ9sTwhqzFxVpCnjyYT.jpg",
@@ -42,7 +48,7 @@ const sample = {
   tv_season_results: [],
 };
 
-const s2 = {
+const _sample2 = {
   adult: false,
   backdrop_path: "/u2dKiAl7UQ9sTwhqzFxVpCnjyYT.jpg",
   belongs_to_collection: null,

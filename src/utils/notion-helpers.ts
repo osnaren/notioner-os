@@ -195,6 +195,11 @@ const createTitle = (titleContent: string): TitlePropertyItemObjectResponse => {
   };
 };
 
+/**
+ * Creates a database ID property for a Notion page.
+ * @param {string} databaseId - The ID of the database.
+ * @returns {DatabaseIdPropertyItemObjectResponse} - The Notion database ID property.
+ */
 const createDatabaseId = (databaseId: string) => {
   return {
     type: "database_id",
