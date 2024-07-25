@@ -76,7 +76,7 @@ export const updateNotionPage = async (movieData: MovieData, itemID: string) => 
     const moviePageDataWithId = {
       ...moviePageData,
       parent: { database_id: MOVIES_DB_ID },
-      properties: { ...movieProperties, Collection: createRelation(collectionId) },
+      properties: { ...movieProperties, ...(collectionId && { Collection: createRelation(collectionId) }) },
     };
     response = await notion.createPage(moviePageDataWithId as CreatePageParameters);
   }
