@@ -1,3 +1,5 @@
+import { MovieDetails, AppendToResponse } from "tmdb-ts";
+
 export type MovieTitleYear = {
   title: string;
   year?: string;
@@ -47,8 +49,10 @@ export type MovieData = {
   Year: number;
   Rated: string;
   Genre: string;
+  Watched: "Not Started" | "In Progress" | "Watched";
   "IMDB Rating": number;
   "Run Time": string;
+  runtime: number;
   Language: string;
   Cast: string;
   Poster: string;
@@ -113,6 +117,20 @@ export type OMDBTransformedResponse = Pick<
   | "imdbID"
   | "Plot"
 >;
+
+export type TmdbMovie = AppendToResponse<
+  MovieDetails,
+  ("images" | "videos" | "watch/providers" | "keywords" | "release_dates")[],
+  "movie"
+>;
+
+export type TmdbVideos = TmdbMovie["videos"];
+
+export type TmdbRelease = TmdbMovie["release_dates"];
+
+export type TmdbKeywords = TmdbMovie["keywords"];
+
+export type TmdbProviders = TmdbMovie["watch/providers"];
 
 export type NotionMovieProperties = {
   Title: {

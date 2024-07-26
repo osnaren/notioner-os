@@ -1,4 +1,5 @@
-import { MovieDetails, TMDB } from "tmdb-ts";
+import { TmdbMovie } from "@ctypes/movie-type";
+import { TMDB } from "tmdb-ts";
 
 const TMDB_ACCESS_TOKEN = process.env.TMDB_ACCESS_TOKEN as string;
 
@@ -10,16 +11,24 @@ export default tmdb;
  * Retrieves TMDB movie data by IMDB ID.
  *
  * @param {string} imdbID - The IMDB ID of the movie.
- * @return {MovieDetails | undefined} The full TMDB movie data.
+ * @return {Promise<TmdbMovie>} The full TMDB movie data.
  */
-export const getTMDBMovieDataByIMDBId = async (imdbID: string) => {
+export const getTMDBMovieDataByIMDBId = async (imdbID: string): Promise<TmdbMovie> => {
   const tmdbData = await tmdb.find.byId(imdbID, { external_source: "imdb_id" });
   const tmdbMovie = tmdbData.movie_results[0];
 
-  const fullTmdbData = (await tmdb.movies.details(tmdbMovie.id)) as MovieDetails | undefined;
+  const fullTmdbData = await tmdb.movies.details(tmdbMovie.id, [
+    "videos",
+    "images",
+    "watch/providers",
+    "keywords",
+    "release_dates",
+  ]);
 
   return fullTmdbData;
 };
+
+/*
 
 const _sample = {
   movie_results: [
@@ -110,3 +119,5 @@ const _sample2 = {
   vote_average: 7,
   vote_count: 1,
 };
+
+*/

@@ -1,6 +1,15 @@
-import { TMDB_IMAGE_BASE_URL, TMDB_SITE_URL } from "@config/constants";
-import { OMDBSuccessResponse, OMDBTransformedResponse, MovieData } from "@ctypes/movie-type";
-import { BelongsToCollection, MovieDetails } from "tmdb-ts";
+import { TMDB_IMAGE_BASE_URL, TMDB_SITE_URL, YOUTUBE_BASE_URL } from "@config/constants";
+import {
+  OMDBSuccessResponse,
+  OMDBTransformedResponse,
+  MovieData,
+  TmdbVideos,
+  TmdbMovie,
+  TmdbRelease,
+  TmdbKeywords,
+  TmdbProviders,
+} from "@ctypes/movie-type";
+import { BelongsToCollection } from "tmdb-ts";
 
 /**
  * Get preferred language based on country
@@ -44,6 +53,67 @@ export const formatTime = (time: string): string => {
 };
 
 /**
+ * Retrieves the trailer link from the given TMDB videos.
+ *
+ * @param {TmdbVideos | undefined} videos - The TMDB videos object or undefined.
+ * @return {string} The trailer link if found, otherwise an empty string.
+ */
+const getTrailerLink = (videos: TmdbVideos | undefined): string => {
+  const trailer = videos?.results.find((video) => video.type === "Trailer");
+  return trailer ? `${YOUTUBE_BASE_URL}${trailer.key}` : "";
+};
+
+/**
+ * Retrieves the certification for a given TMDB release.
+ *
+ * @param {TmdbRelease | undefined} releases - The TMDB release object or undefined.
+ * @return {string} The certification value if found, otherwise an empty string.
+ */
+const getCertification = (releases: TmdbRelease | undefined): string => {
+  const releaseDates = releases?.results.find((release) => release.iso_3166_1 === "IN") || releases?.results[0];
+
+  if (!releaseDates) {
+    return "";
+  }
+
+  const certification =
+    releaseDates.release_dates.find((release) => release.certification && release.iso_639_1 === "ta") ||
+    releaseDates.release_dates.find((release) => release.certification);
+  return certification ? certification.certification : "";
+};
+
+/**
+ * Retrieves a string of keywords separated by commas from a TMDB keywords object.
+ *
+ * @param {TmdbKeywords | undefined} keywords - The TMDB keywords object or undefined.
+ * @return {string} A string of keywords separated by commas, or an empty string if keywords is undefined or has no keywords.
+ */
+const getKeywords = (keywords: TmdbKeywords | undefined): string => {
+  if (!keywords) {
+    return "";
+  }
+  return keywords.keywords?.map((keyword) => keyword.name).join(", ");
+};
+
+/**
+ * Retrieves the provider name from the given TMDB providers object.
+ *
+ * @param {TmdbProviders | undefined} providers - The TMDB providers object or undefined.
+ * @return {string} The provider name if found, otherwise an empty string.
+ */
+const getProviders = (providers: TmdbProviders | undefined): string => {
+  if (!providers) {
+    return "";
+  }
+  const firstProviderKey = Object.keys(providers.results)[0];
+  const providerResults =
+    providers?.results["IN"] ||
+    providers?.results["US"] ||
+    providers?.results[firstProviderKey as keyof typeof providers.results];
+  return providerResults.flatrate[0].provider_name;
+};
+
+/**
  * Format movie data to a specific format
  * @param {OMDBSuccessResponse} movieData - Movie data from OMDB API
  * @returns {OMDBTransformedResponse} - Transformed movie data
@@ -73,16 +143,22 @@ export const formatMovieData = (movieData: OMDBSuccessResponse): OMDBTransformed
  * @param {MovieDetails | undefined} tmdbData - The movie details from TMDB API.
  * @returns {MovieData} The prepared movie data.
  */
-export const prepareMovieData = (omdbData: OMDBTransformedResponse, tmdbData: MovieDetails | undefined): MovieData => {
+export const prepareMovieData = (
+  omdbData: OMDBTransformedResponse,
+  tmdbData: TmdbMovie | undefined,
+  watched: boolean
+): MovieData => {
   const collectionData: BelongsToCollection | undefined = tmdbData?.belongs_to_collection ?? undefined;
 
   const movieData = {
     Title: omdbData.Title || tmdbData?.title || "",
     Year: omdbData.Year,
-    Rated: omdbData.Rated,
+    Rated: getCertification(tmdbData?.release_dates) || omdbData.Rated,
     Genre: omdbData.Genre,
+    Watched: watched ? "Watched" : "Not Started",
     "IMDB Rating": omdbData["IMDB Rating"],
     "Run Time": omdbData["Run Time"] || formatTime(tmdbData?.runtime.toString() || ""),
+    runtime: tmdbData?.runtime || 0,
     Language: omdbData.Language,
     Cast: omdbData.Cast,
     Poster: omdbData.Poster,
@@ -91,10 +167,12 @@ export const prepareMovieData = (omdbData: OMDBTransformedResponse, tmdbData: Mo
     Director: omdbData.Director,
     imdbID: omdbData.imdbID,
     Plot: omdbData.Plot || tmdbData?.overview || "",
+    Keywords: getKeywords(tmdbData?.keywords),
+    "Watch Provider": getProviders(tmdbData?.["watch/providers"]),
     Tagline: tmdbData?.tagline || "",
     "TMDB ID": tmdbData?.id || 0,
     "Where To Watch": `${TMDB_SITE_URL}${tmdbData?.id}/watch?locale=IN`,
-    Trailer: tmdbData?.video ? `https://www.youtube.com/watch?v=${tmdbData?.video}` : "",
+    Trailer: getTrailerLink(tmdbData?.videos),
     "Back Drop": `${TMDB_IMAGE_BASE_URL}${tmdbData?.backdrop_path}`,
     Icon: `${TMDB_IMAGE_BASE_URL}${tmdbData?.poster_path}`,
     Collection: collectionData?.name || "",
@@ -122,17 +200,22 @@ export const MOVIE_PROPERTIES = {
     type: "rich_text",
     rich_text: [null],
   },
-  // Watched: {
-  //   id: "AK_Z",
-  //   type: "status",
-  //   status: {
-  //     name: "Watched",
-  //   },
-  // },
+  Watched: {
+    id: "AK_Z",
+    type: "status",
+    status: {
+      name: "Not Started",
+    },
+  },
   "Run Time": {
     id: "Ae%3Dr",
     type: "rich_text",
     rich_text: [null],
+  },
+  runtime: {
+    id: "_%7Bf_",
+    type: "number",
+    number: null,
   },
   Rated: {
     id: "B%7CUh",
@@ -156,6 +239,16 @@ export const MOVIE_PROPERTIES = {
   },
   "My Rating": {
     id: "NKPU",
+    type: "select",
+    select: [null],
+  },
+  Keywords: {
+    id: "T%3D%5EQ",
+    type: "multi_select",
+    multi_select: [null],
+  },
+  "Watch Provider": {
+    id: "pQnS",
     type: "select",
     select: [null],
   },

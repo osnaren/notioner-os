@@ -33,13 +33,14 @@ import { MOVIE_PROPERTIES, prepareMovieData } from "@utils/movie-helpers";
  * Asynchronously gathers movie data by title and year using the OMDB and TMDB APIs.
  *
  * @param {MovieTitleYear} titleYear - An object containing the movie title and year.
+ * @param {boolean} watched - Whether the movie is watched or not.
  * @return {Promise<MovieData>} A promise that resolves to the prepared movie data.
  */
-export const gatherMovieData = async ({ title, year }: MovieTitleYear) => {
+export const gatherMovieData = async ({ title, year }: MovieTitleYear, watched = false) => {
   const omdbMovieData = await getMovieDataByTitle({ title, year });
 
   const tmdbMovieData = await getTMDBMovieDataByIMDBId(omdbMovieData.imdbID);
-  const movieData = prepareMovieData(omdbMovieData, tmdbMovieData);
+  const movieData = prepareMovieData(omdbMovieData, tmdbMovieData, watched);
 
   return movieData;
 };

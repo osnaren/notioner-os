@@ -2,6 +2,9 @@
 export const TMDB_IMAGE_BASE_URL = "https://image.tmdb.org/t/p/original";
 export const TMDB_SITE_URL = "https://www.themoviedb.org/movie/";
 
+// YouTube
+export const YOUTUBE_BASE_URL = "https://www.youtube.com/watch?v=";
+
 // Notion
 export const MOVIES_DB_ID = "53999533-c639-467e-b0cb-bec31b241407";
 export const COLLECTION_DB_ID = "b206d07b-0728-4b4f-a51c-1afa08bfbb84";
