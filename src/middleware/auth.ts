@@ -16,6 +16,17 @@ const validateIP = (ip: string): boolean => {
 };
 
 /**
+ * Retrieves the client IP address from the request object.
+ * It checks for the "CF-Connecting-IP" header, "X-Forwarded-For" header,
+ * and falls back to the "req.ip" property if available.
+ * @param {NextRequest} req - The NextRequest object representing the incoming request.
+ * @returns {string} The client IP address as a string.
+ */
+const getClientIP = (req: NextRequest): string => {
+  return req.headers.get("CF-Connecting-IP") || req.headers.get("x-forwarded-for") || req.ip || "";
+};
+
+/**
  * Validates if the given hostname is in the list of allowed hosts.
  *
  * @param {string} hostname - The hostname to be validated.
@@ -39,30 +50,6 @@ const validateToken = (token: string): boolean => {
   return providedToken === TOKEN;
 };
 
-// const storeAuthStatus = (status: boolean) => {
-//   localStorage.setItem("authStatus", status ? "true" : "false");
-// };
-
-/**
- * A function to verify the authentication of a request.
- *
- * @param {NextRequest} request - The request object containing URL, cookies, and headers.
- * @return {Promise<NextResponse>} A Promise that resolves to the next response.
- */
-export function verifyAuth(request: NextRequest) {
-  const requestIp = request.headers.get("x-forwarded-for") || request.ip || "127.0.0.1";
-  const { hostname } = new URL(request.url);
-  const authToken = getAuthToken(request);
-
-  const isAuthorized = isAuthorizedRequest(hostname, authToken, requestIp);
-
-  if (!isAuthorized) {
-    return NextResponse.rewrite(new URL("/unauthorized", request.url));
-  }
-
-  return NextResponse.next();
-}
-
 /**
  * Retrieves the authentication token from various sources in the request object.
  *
@@ -78,6 +65,10 @@ function getAuthToken(request: NextRequest): string {
   return tokenFromQueryParam || tokenFromCookie || tokenFromHeader || "";
 }
 
+// const storeAuthStatus = (status: boolean) => {
+//   localStorage.setItem("authStatus", status ? "true" : "false");
+// };
+
 /**
  * Checks if the request is authorized based on the hostname, auth token, and request IP.
  *
@@ -87,7 +78,27 @@ function getAuthToken(request: NextRequest): string {
  * @return {boolean} Returns true if the request is authorized, false otherwise.
  */
 function isAuthorizedRequest(hostname: string, authToken: string, requestIp: string): boolean {
-  return validateHostname(hostname) || validateToken(authToken) || validateIP(requestIp);
+  return (validateHostname(hostname) && validateIP(requestIp)) || validateToken(authToken);
+}
+
+/**
+ * A function to verify the authentication of a request.
+ *
+ * @param {NextRequest} request - The request object containing URL, cookies, and headers.
+ * @return {NextResponse} A Promise that resolves to the next response.
+ */
+export function verifyAuth(request: NextRequest): NextResponse {
+  const { hostname } = new URL(request.url);
+  const requestIp = getClientIP(request);
+  const authToken = getAuthToken(request);
+
+  const isAuthorized = isAuthorizedRequest(hostname, authToken, requestIp);
+
+  if (!isAuthorized) {
+    return NextResponse.rewrite(new URL("/unauthorized", request.url));
+  }
+
+  return NextResponse.next();
 }
 
 export default verifyAuth;
