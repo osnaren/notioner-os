@@ -49,7 +49,7 @@ export type MovieData = {
   Year: number;
   Rated: string;
   Genre: string;
-  Watched: "Not Started" | "In Progress" | "Watched";
+  Watched: "Not started" | "In Progress" | "Watched";
   "IMDB Rating": number;
   "Run Time": string;
   runtime: number;

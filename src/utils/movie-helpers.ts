@@ -155,7 +155,7 @@ export const prepareMovieData = (
     Year: omdbData.Year,
     Rated: getCertification(tmdbData?.release_dates) || omdbData.Rated,
     Genre: omdbData.Genre,
-    Watched: watched ? "Watched" : "Not Started",
+    Watched: watched ? "Watched" : "Not started",
     "IMDB Rating": omdbData["IMDB Rating"],
     "Run Time": omdbData["Run Time"] || formatTime(tmdbData?.runtime.toString() || ""),
     runtime: tmdbData?.runtime || 0,
@@ -204,7 +204,7 @@ export const MOVIE_PROPERTIES = {
     id: "AK_Z",
     type: "status",
     status: {
-      name: "Not Started",
+      name: "Not started",
     },
   },
   "Run Time": {
