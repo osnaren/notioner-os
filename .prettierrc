@@ -1,7 +1,14 @@
 {
+  "plugins": [
+    "prettier-plugin-organize-imports",
+    "prettier-plugin-tailwindcss"
+  ],
+  "semi": true,
+  "singleQuote": true,
   "trailingComma": "es5",
-  "singleQuote": false,
   "tabWidth": 2,
   "printWidth": 120,
-  "parser": "typescript"
+  "parser": "typescript",
+  "bracketSpacing": true,
+  "endOfLine": "lf"
 }

@@ -1,3 +1,6 @@
 {
-    "codescene.enableCodeLenses": false
+    "codescene.enableCodeLenses": false,
+    "cSpell.words": [
+        "notioner"
+    ]
 }
