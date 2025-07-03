@@ -1,12 +1,12 @@
-import React from "react";
-import { Metadata } from "next";
-import "./global.css";
+import { Metadata } from 'next';
+import React from 'react';
+import './global.css';
 
-import { Toaster } from "react-hot-toast";
+import { Toaster } from 'react-hot-toast';
 
 export const metadata: Metadata = {
-  title: "Notioner",
-  description: "Notioner is a tool to help you manage your Notion pages with ease.",
+  title: 'Notioner',
+  description: 'Notioner is a tool to help you manage your Notion pages with ease.',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

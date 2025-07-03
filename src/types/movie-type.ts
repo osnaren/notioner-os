@@ -1,4 +1,4 @@
-import { MovieDetails, AppendToResponse } from "tmdb-ts";
+import { AppendToResponse, MovieDetails } from 'tmdb-ts';
 
 export type MovieTitleYear = {
   title: string;
@@ -10,7 +10,7 @@ export type MovieImdbId = {
 };
 
 export type OMDBSuccessResponse = {
-  Response: "True";
+  Response: 'True';
   Title: string;
   Year: string;
   Rated: string;
@@ -38,7 +38,7 @@ export type OMDBSuccessResponse = {
 };
 
 export type OMDBErrorResponse = {
-  Response: "False";
+  Response: 'False';
   Error: string;
 };
 
@@ -49,23 +49,23 @@ export type MovieData = {
   Year: number;
   Rated: string;
   Genre: string;
-  Watched: "Not started" | "In Progress" | "Watched";
-  "IMDB Rating": number;
-  "Run Time": string;
+  Watched: 'Not started' | 'In Progress' | 'Watched';
+  'IMDB Rating': number;
+  'Run Time': string;
   runtime: number;
   Language: string;
   Cast: string;
   Poster: string;
   Type: string;
-  "Box Office": string;
+  'Box Office': string;
   Director: string;
   imdbID: string;
   Plot: string;
   Tagline: string;
-  "TMDB ID": number;
-  "Where To Watch": string;
+  'TMDB ID': number;
+  'Where To Watch': string;
   Trailer: string;
-  "Back Drop": string;
+  'Back Drop': string;
   Icon: string;
   Collection: string;
   CID: number;
@@ -75,62 +75,62 @@ export type MovieData = {
 };
 
 export type MovieDataProperties =
-  | "Title"
-  | "Year"
-  | "Rated"
-  | "Genre"
-  | "IMDB Rating"
-  | "Run Time"
-  | "Language"
-  | "Cast"
-  | "Poster"
-  | "Type"
-  | "Box Office"
-  | "Director"
-  | "imdbID"
-  | "Plot"
-  | "Tagline"
-  | "TMDB ID"
-  | "Where To Watch"
-  | "Trailer"
-  | "Back Drop"
-  | "Icon"
-  | "Collection"
-  | "CID"
-  | "CBackdrop"
-  | "CPoster";
+  | 'Title'
+  | 'Year'
+  | 'Rated'
+  | 'Genre'
+  | 'IMDB Rating'
+  | 'Run Time'
+  | 'Language'
+  | 'Cast'
+  | 'Poster'
+  | 'Type'
+  | 'Box Office'
+  | 'Director'
+  | 'imdbID'
+  | 'Plot'
+  | 'Tagline'
+  | 'TMDB ID'
+  | 'Where To Watch'
+  | 'Trailer'
+  | 'Back Drop'
+  | 'Icon'
+  | 'Collection'
+  | 'CID'
+  | 'CBackdrop'
+  | 'CPoster';
 
 export type OMDBTransformedResponse = Pick<
   MovieData,
-  | "Title"
-  | "Year"
-  | "Rated"
-  | "Genre"
-  | "IMDB Rating"
-  | "Run Time"
-  | "Language"
-  | "Cast"
-  | "Poster"
-  | "Type"
-  | "Box Office"
-  | "Director"
-  | "imdbID"
-  | "Plot"
+  | 'Title'
+  | 'Year'
+  | 'Rated'
+  | 'Genre'
+  | 'IMDB Rating'
+  | 'Run Time'
+  | 'Language'
+  | 'Cast'
+  | 'Poster'
+  | 'Type'
+  | 'Box Office'
+  | 'Director'
+  | 'imdbID'
+  | 'Plot'
 >;
 
 export type TmdbMovie = AppendToResponse<
   MovieDetails,
-  ("images" | "videos" | "watch/providers" | "keywords" | "release_dates")[],
-  "movie"
+  ('images' | 'videos' | 'watch/providers' | 'keywords' | 'release_dates')[],
+  'movie'
 >;
 
-export type TmdbVideos = TmdbMovie["videos"];
+export type TmdbVideos = TmdbMovie['videos'];
 
-export type TmdbRelease = TmdbMovie["release_dates"];
+export type TmdbRelease = TmdbMovie['release_dates'];
 
-export type TmdbKeywords = TmdbMovie["keywords"];
+export type TmdbKeywords = TmdbMovie['keywords'];
 
-export type TmdbProviders = TmdbMovie["watch/providers"];
+export type TmdbProviders = TmdbMovie['watch/providers'];
 
 export type NotionMovieProperties = {
   Title: {
@@ -153,7 +153,7 @@ export type NotionMovieProperties = {
     type: string;
     rich_text: (null | string)[];
   };
-  "Run Time": {
+  'Run Time': {
     id: string;
     type: string;
     rich_text: (null | string)[];
@@ -163,12 +163,12 @@ export type NotionMovieProperties = {
     type: string;
     select: (null | string)[];
   };
-  "Watched On": {
+  'Watched On': {
     id: string;
     type: string;
     date: (null | string)[];
   };
-  "TMDB ID": {
+  'TMDB ID': {
     id: string;
     type: string;
     number: number | null;
@@ -178,7 +178,7 @@ export type NotionMovieProperties = {
     type: string;
     rich_text: (null | string)[];
   };
-  "My Rating": {
+  'My Rating': {
     id: string;
     type: string;
     select: (null | string)[];
@@ -213,7 +213,7 @@ export type NotionMovieProperties = {
     type: string;
     rich_text: (null | string)[];
   };
-  "Where To Watch": {
+  'Where To Watch': {
     id: string;
     type: string;
     url: string;
@@ -223,17 +223,17 @@ export type NotionMovieProperties = {
     type: string;
     number: number;
   };
-  "Watch Count": {
+  'Watch Count': {
     id: string;
     type: string;
     number: number | null;
   };
-  "IMDB Rating": {
+  'IMDB Rating': {
     id: string;
     type: string;
     number: number;
   };
-  "Box Office": {
+  'Box Office': {
     id: string;
     type: string;
     number: number;
@@ -251,27 +251,27 @@ export type IdType = {
 };
 export type CheckboxPropertyItemObjectResponse = {
   id?: string;
-  type: "checkbox";
+  type: 'checkbox';
   checkbox: boolean;
 };
 export type EmailPropertyItemObjectResponse = {
   id?: string;
-  type: "email";
+  type: 'email';
   email: string;
 };
 export type NumberPropertyItemObjectResponse = {
   id?: string;
-  type: "number";
+  type: 'number';
   number: number | null;
 };
 export type StatusPropertyItemObjectResponse = {
   id?: string;
-  type: "status";
+  type: 'status';
   status: { name: string };
 };
 export type DatePropertyItemObjectResponse = {
   id?: string;
-  type: "date";
+  type: 'date';
   date: {
     start: string;
     end: string | null;
@@ -283,47 +283,47 @@ export type FilesPropertyItemObjectResponse = {
   type: string;
   files: Array<{
     name: string;
-    type: "external";
+    type: 'external';
     external: {
       url: string;
     };
   }>;
 };
 export type ExternalFilePropertyItemObjectResponse = {
-  type: "external";
+  type: 'external';
   external: {
     url: string;
   };
 };
 export type UrlPropertyItemObjectResponse = {
   id?: string;
-  type: "url";
+  type: 'url';
   url: string;
 };
 export type RelationPropertyItemObjectResponse = {
   id?: string;
-  type: "relation";
+  type: 'relation';
   relation: Array<{
     id: string;
   }>;
 };
 export type SelectPropertyItemObjectResponse = {
   id?: string;
-  type: "select";
+  type: 'select';
   select: { name: string };
 };
 export type MultiSelectPropertyItemObjectResponse = {
   id?: string;
-  type: "multi_select";
+  type: 'multi_select';
   multi_select: Array<{
     name: string;
   }>;
 };
 export type RichTextPropertyItemObjectResponse = {
   id?: string;
-  type: "rich_text";
+  type: 'rich_text';
   rich_text: Array<{
-    type: "text";
+    type: 'text';
     text: {
       content: string;
       link: string | null;
@@ -331,10 +331,10 @@ export type RichTextPropertyItemObjectResponse = {
   }>;
 };
 export type TitlePropertyItemObjectResponse = {
-  id: "title";
-  type: "title";
+  id: 'title';
+  type: 'title';
   title: Array<{
-    type: "text";
+    type: 'text';
     text: {
       content: string;
       link: string | null;
@@ -358,16 +358,16 @@ export type NotionPropertyItemObjectResponse =
   | TitlePropertyItemObjectResponse;
 
 export type NotionProperties =
-  | "id"
-  | "url"
-  | "status"
-  | "date"
-  | "checkbox"
-  | "email"
-  | "number"
-  | "files"
-  | "relation"
-  | "select"
-  | "multi_select"
-  | "rich_text"
-  | "title";
+  | 'id'
+  | 'url'
+  | 'status'
+  | 'date'
+  | 'checkbox'
+  | 'email'
+  | 'number'
+  | 'files'
+  | 'relation'
+  | 'select'
+  | 'multi_select'
+  | 'rich_text'
+  | 'title';

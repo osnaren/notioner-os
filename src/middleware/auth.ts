@@ -1,9 +1,9 @@
-import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
-import { ALLOWED_HOSTS } from "@config/constants";
+import { ALLOWED_HOSTS } from '@config/constants';
+import type { NextRequest } from 'next/server';
+import { NextResponse } from 'next/server';
 
-const TOKEN = process.env.NOTIONER_TOKEN_MINI || "";
-const allowedIPs = process.env.ALLOWED_IPS?.split(",") || [];
+const TOKEN = process.env.NOTIONER_TOKEN_MINI || '';
+const allowedIPs = process.env.ALLOWED_IPS?.split(',') || [];
 
 /**
  * Validates if the given IP address is in the list of allowed IP addresses.
@@ -23,7 +23,7 @@ const validateIP = (ip: string): boolean => {
  * @returns {string} The client IP address as a string.
  */
 const getClientIP = (req: NextRequest): string => {
-  return req.headers.get("CF-Connecting-IP") || req.headers.get("x-forwarded-for") || req.ip || "";
+  return req.headers.get('CF-Connecting-IP') || req.headers.get('x-forwarded-for') || req.ip || '';
 };
 
 /**
@@ -43,8 +43,8 @@ const validateHostname = (hostname: string): boolean => {
  * @return {boolean} Indicates whether the token is valid.
  */
 const validateToken = (token: string): boolean => {
-  const tokenParts = token.split(" ");
-  const isValidFormat = tokenParts.length === 2 && tokenParts[0] === "Bearer";
+  const tokenParts = token.split(' ');
+  const isValidFormat = tokenParts.length === 2 && tokenParts[0] === 'Bearer';
   const providedToken = isValidFormat ? tokenParts[1] : token;
 
   return providedToken === TOKEN;
@@ -58,11 +58,11 @@ const validateToken = (token: string): boolean => {
  */
 function getAuthToken(request: NextRequest): string {
   const searchParams = new URL(request.url).searchParams;
-  const tokenFromQueryParam = searchParams.get("token");
-  const tokenFromCookie = request.cookies.get("token")?.value;
-  const tokenFromHeader = request.headers.get("authorization") || request.headers.get("Authorization");
+  const tokenFromQueryParam = searchParams.get('token');
+  const tokenFromCookie = request.cookies.get('token')?.value;
+  const tokenFromHeader = request.headers.get('authorization') || request.headers.get('Authorization');
 
-  return tokenFromQueryParam || tokenFromCookie || tokenFromHeader || "";
+  return tokenFromQueryParam || tokenFromCookie || tokenFromHeader || '';
 }
 
 // const storeAuthStatus = (status: boolean) => {
@@ -95,7 +95,7 @@ export function verifyAuth(request: NextRequest): NextResponse {
   const isAuthorized = isAuthorizedRequest(hostname, authToken, requestIp);
 
   if (!isAuthorized) {
-    return NextResponse.rewrite(new URL("/unauthorized", request.url));
+    return NextResponse.rewrite(new URL('/unauthorized', request.url));
   }
 
   return NextResponse.next();

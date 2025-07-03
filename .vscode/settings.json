@@ -1,6 +1,9 @@
 {
-    "codescene.enableCodeLenses": false,
-    "cSpell.words": [
-        "notioner"
-    ]
+  "codescene.enableCodeLenses": false,
+  "cSpell.words": ["notioner"],
+  "jest.outputConfig": {
+    "revealOn": "run",
+    "revealWithFocus": "test-results",
+    "clearOnRun": "none"
+  }
 }

@@ -1,33 +1,33 @@
 import {
-  MovieTitleYear,
   MovieData,
+  MovieTitleYear,
+  NotionMovieProperties,
   NotionProperties,
   NotionPropertyItemObjectResponse,
-  NotionMovieProperties,
   RelationPropertyItemObjectResponse,
-} from "@ctypes/movie-type";
-import { CreatePageParameters, UpdatePageParameters } from "@notionhq/client/build/src/api-endpoints";
+} from '@ctypes/movie-type';
+import { CreatePageParameters, UpdatePageParameters } from '@notionhq/client/build/src/api-endpoints';
 
-import { MOVIES_DB_ID, COLLECTION_DB_ID, MOVIES_RELATION_ID, SERIES_RELATION_ID } from "@config/constants";
+import { COLLECTION_DB_ID, MOVIES_DB_ID, MOVIES_RELATION_ID, SERIES_RELATION_ID } from '@config/constants';
 
-import notion from "@utils/notion";
-import { getMovieDataByTitle } from "@utils/omdb";
-import { getTMDBMovieDataByIMDBId } from "@utils/tmdb";
+import { MOVIE_PROPERTIES, prepareMovieData } from '@utils/movie-helpers';
+import notion from '@utils/notion';
 import {
-  createRichText,
-  createMultiSelect,
-  createSelect,
-  createNumber,
-  createDate,
-  createStatus,
-  createFiles,
-  createExternalFile,
-  createRelation,
-  createTitle,
   createDatabaseId,
+  createDate,
+  createExternalFile,
+  createFiles,
+  createMultiSelect,
+  createNumber,
+  createRelation,
+  createRichText,
+  createSelect,
+  createStatus,
+  createTitle,
   createUrl,
-} from "@utils/notion-helpers";
-import { MOVIE_PROPERTIES, prepareMovieData } from "@utils/movie-helpers";
+} from '@utils/notion-helpers';
+import { getMovieDataByTitle } from '@utils/omdb';
+import { getTMDBMovieDataByIMDBId } from '@utils/tmdb';
 
 /**
  * Asynchronously gathers movie data by title and year using the OMDB and TMDB APIs.
@@ -46,7 +46,7 @@ export const gatherMovieData = async ({ title, year }: MovieTitleYear, watched =
 };
 
 let globalMovieData: MovieData = {} as MovieData;
-let globalItemID = "";
+let globalItemID = '';
 
 /**
  * Updates a Notion page with the given movie data.
@@ -59,7 +59,7 @@ export const updateNotionPage = async (movieData: MovieData, itemID: string) => 
   globalMovieData = movieData;
   globalItemID = itemID;
 
-  const { Icon, "Back Drop": BackDrop, Collection } = movieData;
+  const { Icon, 'Back Drop': BackDrop, Collection } = movieData;
 
   const movieProperties = await processMovieProperties(movieData);
   const moviePageData = {
@@ -95,7 +95,7 @@ export const processMovieProperties = async (movieData: MovieData): Promise<Noti
   const moviePropertiesKeys = Object.keys(movieProperties) as [];
   for (const moviePropertyKey of moviePropertiesKeys) {
     const moviePropertyValue = movieData[moviePropertyKey as keyof MovieData];
-    if (moviePropertyValue !== undefined && moviePropertyValue !== "") {
+    if (moviePropertyValue !== undefined && moviePropertyValue !== '') {
       const value = movieProperties[moviePropertyKey] as any;
       const { id: propertyId, type: propertyType } = value;
       const moviePropertyTypeValue = await handlePropertyType(moviePropertyKey, propertyId, propertyType, movieData);
@@ -157,12 +157,12 @@ const createMovieRelation = async (
   mediaType: string,
   propertyId: string
 ): Promise<RelationPropertyItemObjectResponse> => {
-  let relationId = "";
+  let relationId = '';
   switch (mediaType) {
-    case "movie":
+    case 'movie':
       relationId = MOVIES_RELATION_ID;
       break;
-    case "Series":
+    case 'Series':
       relationId = SERIES_RELATION_ID;
       break;
     default:
@@ -179,14 +179,14 @@ const createMovieRelation = async (
  * @param {string} itemID - The ID of the item associated with the collection.
  * @return {Promise<string>} The ID of the existing or newly created collection.
  */
-const checkAndCreateMovieCollection = async (collectionName: string, itemID = ""): Promise<string> => {
-  if (!collectionName) return "";
+const checkAndCreateMovieCollection = async (collectionName: string, itemID = ''): Promise<string> => {
+  if (!collectionName) return '';
 
   const [response] = await Promise.all([
     notion.queryDatabase({
       database_id: COLLECTION_DB_ID,
       filter: {
-        property: "Name",
+        property: 'Name',
         title: {
           equals: collectionName,
         },
@@ -195,7 +195,7 @@ const checkAndCreateMovieCollection = async (collectionName: string, itemID = ""
   ]);
 
   const collectionExists = response && response?.results.length > 0;
-  const collectionID = collectionExists ? response.results[0].id : "";
+  const collectionID = collectionExists ? response.results[0].id : '';
 
   if (!collectionID) {
     const { CBackdrop, CPoster, CID } = globalMovieData;
@@ -205,13 +205,13 @@ const checkAndCreateMovieCollection = async (collectionName: string, itemID = ""
       parent: createDatabaseId(COLLECTION_DB_ID),
       properties: {
         Poster: createFiles(collectionName, CPoster),
-        "Collection ID": createNumber(CID),
+        'Collection ID': createNumber(CID),
         Name: createTitle(collectionName),
         ...(itemID && { Movies: createRelation(itemID) }),
       },
     };
     const newCollectionResponse = await notion.createPage(collectionPageData as unknown as CreatePageParameters);
-    return newCollectionResponse?.id || "";
+    return newCollectionResponse?.id || '';
   }
 
   return collectionID;

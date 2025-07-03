@@ -1,5 +1,5 @@
-import { gatherMovieData, updateNotionPage } from "../utils";
-import { createResponse } from "@utils/api-helpers";
+import { createResponse } from '@utils/api-helpers';
+import { gatherMovieData, updateNotionPage } from '../utils';
 
 // Handler for POST requests
 export const POST = async (req: Request) => {
@@ -7,8 +7,8 @@ export const POST = async (req: Request) => {
     const { title, year, itemId, watched = false } = await req.json();
     const movieData = await gatherMovieData({ title, year }, watched);
     await updateNotionPage(movieData, itemId);
-    return createResponse({ status: "New movie added", movie: movieData }, { status: 200 });
+    return createResponse({ status: 'New movie added', movie: movieData }, { status: 200 });
   } catch (error) {
-    return createResponse({ error: "Failed to add movie", details: error }, { status: 500 });
+    return createResponse({ error: 'Failed to add movie', details: error }, { status: 500 });
   }
 };

@@ -1,4 +1,4 @@
-import axios, { AxiosError, AxiosProgressEvent, AxiosRequestConfig } from "axios";
+import axios, { AxiosError, AxiosProgressEvent, AxiosRequestConfig } from 'axios';
 
 /**
  * Handles an Axios error and returns a new Error object.
@@ -7,8 +7,8 @@ import axios, { AxiosError, AxiosProgressEvent, AxiosRequestConfig } from "axios
  * @return {Error} The new Error object.
  */
 function handleError(error: AxiosError): Error {
-  console.error("Axios error:", error.response?.data || error.message);
-  return new Error(JSON.stringify(error.response?.data) || "An unexpected error occurred");
+  console.error('Axios error:', error.response?.data || error.message);
+  return new Error(JSON.stringify(error.response?.data) || 'An unexpected error occurred');
 }
 
 /**
@@ -22,7 +22,7 @@ function handleError(error: AxiosError): Error {
  * @return {Promise<any>} The response data from the request.
  */
 async function createRequest(
-  method: "get" | "post" | "put" | "delete",
+  method: 'get' | 'post' | 'put' | 'delete',
   url: string,
   dataOrParams: any,
   headers: any = {},
@@ -34,12 +34,12 @@ async function createRequest(
     onDownloadProgress: progressCallback,
   };
 
-  if (method === "get" || method === "delete") {
+  if (method === 'get' || method === 'delete') {
     config.params = dataOrParams;
   }
 
   try {
-    const response = await axios[method](url, method === "get" || method === "delete" ? config : dataOrParams, config);
+    const response = await axios[method](url, method === 'get' || method === 'delete' ? config : dataOrParams, config);
     return response.data;
   } catch (error) {
     throw handleError(error as AxiosError);

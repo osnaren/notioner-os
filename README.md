@@ -6,18 +6,18 @@ Notioner OS is a powerful application designed to supercharge your Notion worksp
 
 ## Features
 
-* **Cinescape:** Organize and manage your movie and series watchlist with ease.
-* **Automated Data Imports:** Automatically import movie and series data from external sources (e.g., TMDB, OMDB) into Notion.
-* **Customizable Templates:** Create and use custom templates for various Notion pages and databases.
-* **(Future) WebSockets:** Real-time updates and synchronization between Notioner OS and your Notion workspace.
-* **(Future) Extensive Notion Integration:** Expand functionality to manage and automate tasks across multiple Notion pages and databases.
+- **Cinescape:** Organize and manage your movie and series watchlist with ease.
+- **Automated Data Imports:** Automatically import movie and series data from external sources (e.g., TMDB, OMDB) into Notion.
+- **Customizable Templates:** Create and use custom templates for various Notion pages and databases.
+- **(Future) WebSockets:** Real-time updates and synchronization between Notioner OS and your Notion workspace.
+- **(Future) Extensive Notion Integration:** Expand functionality to manage and automate tasks across multiple Notion pages and databases.
 
 ## Technology Stack
 
-* **Next.js:** Frontend framework for building performant and scalable web applications.
-* **Node.js:** Backend runtime environment for server-side logic and API interactions.
-* **Notion API:** Official API for interacting with Notion data and functionalities.
-* **TMDB API, OMDB API:** External APIs for fetching movie and series information.
+- **Next.js:** Frontend framework for building performant and scalable web applications.
+- **Node.js:** Backend runtime environment for server-side logic and API interactions.
+- **Notion API:** Official API for interacting with Notion data and functionalities.
+- **TMDB API, OMDB API:** External APIs for fetching movie and series information.
 
 ## Getting Started
 
@@ -28,6 +28,6 @@ Notioner OS is a powerful application designed to supercharge your Notion worksp
 
 ## Acknowledgements
 
-* Notion for their powerful API and platform.
-* The Movie Database (TMDB) and Open Movie Database (OMDB) for their data sources.
-* The open-source community for their valuable contributions and support.
+- Notion for their powerful API and platform.
+- The Movie Database (TMDB) and Open Movie Database (OMDB) for their data sources.
+- The open-source community for their valuable contributions and support.

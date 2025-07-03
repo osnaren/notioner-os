@@ -1,6 +1,6 @@
-import { NextRequest, NextResponse } from "next/server";
-import { verifyAuth } from "./middleware/auth";
-import { PROTECTED_ROUTES } from "@config/constants";
+import { PROTECTED_ROUTES } from '@config/constants';
+import { NextRequest, NextResponse } from 'next/server';
+import { verifyAuth } from './middleware/auth';
 
 /**
  * Middleware function to check if the request path matches any protected routes and perform authentication check.
@@ -31,6 +31,6 @@ export const config = {
      * - _next/image (image optimization files)
      * - favicon.ico (favicon file)
      */
-    "/((?!_next/static|_next/image|favicon.ico).*)",
+    '/((?!_next/static|_next/image|favicon.ico).*)',
   ],
 };

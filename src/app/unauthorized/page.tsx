@@ -1,8 +1,8 @@
-"use client";
-import React, { useState } from "react";
+'use client';
+import React, { useState } from 'react';
 
 const UnauthorizedPage: React.FC = () => {
-  const [inputValue, setInputValue] = useState("");
+  const [inputValue, setInputValue] = useState('');
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
@@ -10,7 +10,7 @@ const UnauthorizedPage: React.FC = () => {
 
   const handleButtonClick = () => {
     // Handle button click logic here
-    console.log("Button clicked");
+    console.log('Button clicked');
   };
 
   return (

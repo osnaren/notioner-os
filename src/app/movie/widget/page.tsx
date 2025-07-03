@@ -1,31 +1,31 @@
-"use client";
+'use client';
 
-import React, { useState } from "react";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import toast from "react-hot-toast";
+import { zodResolver } from '@hookform/resolvers/zod';
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
+import { z } from 'zod';
 
-import { createRequest } from "@utils/api";
+import { createRequest } from '@utils/api';
 
-import { Button } from "@cui/components/ui/button";
-import { Input } from "@cui/components/ui/input";
-import { Checkbox } from "@cui/components/ui/checkbox";
-import { HoverCard, HoverCardContent, HoverCardTrigger } from "@cui/components/ui/hover-card";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@cui/components/ui/form";
-import { Card, CardContent, CardHeader, CardTitle } from "@cui/components/ui/card";
+import { Button } from '@cui/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@cui/components/ui/card';
+import { Checkbox } from '@cui/components/ui/checkbox';
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@cui/components/ui/form';
+import { HoverCard, HoverCardContent, HoverCardTrigger } from '@cui/components/ui/hover-card';
+import { Input } from '@cui/components/ui/input';
 
-import { ReloadIcon } from "@radix-ui/react-icons";
-import { MdOutlineMovieFilter, MdOutlineInfo } from "react-icons/md";
-import { BsCalendarDate } from "react-icons/bs";
-import { TbEyeSearch } from "react-icons/tb";
+import { ReloadIcon } from '@radix-ui/react-icons';
+import { BsCalendarDate } from 'react-icons/bs';
+import { MdOutlineInfo, MdOutlineMovieFilter } from 'react-icons/md';
+import { TbEyeSearch } from 'react-icons/tb';
 
 const movieFormSchema = z.object({
   title: z.string().min(3, {
-    message: "Movie name must be at least 3 characters.",
+    message: 'Movie name must be at least 3 characters.',
   }),
   year: z.string().regex(/^\d{4}$/, {
-    message: "Year must be a 4-digit number.",
+    message: 'Year must be a 4-digit number.',
   }),
   watched: z.boolean().default(false),
 });
@@ -38,12 +38,12 @@ const MovieWidget: React.FC = () => {
   const form = useForm({
     resolver: zodResolver(movieFormSchema),
     defaultValues: {
-      title: "",
-      year: "",
+      title: '',
+      year: '',
       watched: false,
     },
-    reValidateMode: "onBlur",
-    mode: "onSubmit",
+    reValidateMode: 'onBlur',
+    mode: 'onSubmit',
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -56,12 +56,12 @@ const MovieWidget: React.FC = () => {
    */
   const onSubmit = (data: z.infer<typeof movieFormSchema>): void => {
     setIsSubmitting(true);
-    createRequest("post", "/api/movie/write", data)
+    createRequest('post', '/api/movie/write', data)
       .then(() => {
-        toast.success("Movie added successfully!");
+        toast.success('Movie added successfully!');
       })
       .catch(() => {
-        toast.error("Failed to add movie.");
+        toast.error('Failed to add movie.');
       })
       .finally(() => {
         form.reset();
@@ -79,7 +79,7 @@ const MovieWidget: React.FC = () => {
         <HoverCardTrigger>
           <MdOutlineInfo />
         </HoverCardTrigger>
-        <HoverCardContent className="font-mono font-light text-sm" side="right">
+        <HoverCardContent className="font-mono text-sm font-light" side="right">
           Enter the title and year of the movie. We&lsquo;ll add it to the Notion CineScape.
         </HoverCardContent>
       </HoverCard>
@@ -130,7 +130,7 @@ const MovieWidget: React.FC = () => {
             name="watched"
             render={({ field }) => (
               <FormItem className="flex items-center gap-2">
-                <FormLabel className="flex items-center gap-2 mt-2">
+                <FormLabel className="mt-2 flex items-center gap-2">
                   <TbEyeSearch size={20} /> Watched?
                 </FormLabel>
                 <FormControl>
@@ -151,7 +151,7 @@ const MovieWidget: React.FC = () => {
   };
 
   return (
-    <Card className="w-[350px] m-8">
+    <Card className="m-8 w-[350px]">
       <CardHeader>
         <CardTitle className="flex items-center justify-between gap-2">
           Add Movie
