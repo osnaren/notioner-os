@@ -1,4 +1,4 @@
-import { PROTECTED_ROUTES } from '@config/constants';
+import { PROTECTED_ROUTES } from '@/config/constants';
 import { NextRequest, NextResponse } from 'next/server';
 import { verifyAuth } from './middleware/auth';
 

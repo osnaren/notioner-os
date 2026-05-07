@@ -1,0 +1,57 @@
+# Movies
+
+This document explains how the movie feature works in Notioner OS.
+
+## Overview
+
+The movie feature allows you to manage your movie watchlist in Notion. You can add new movies, update existing ones, and view your entire collection.
+
+## Notion Database
+
+The movie feature uses a Notion database to store your movies. The database should have the following properties:
+
+- **Title**: The title of the movie (Title property).
+- **Genre**: The genre of the movie (Multi-select property).
+- **Type**: The type of media (Relation property, e.g., "Movie", "Series").
+- **imdbID**: The IMDB ID of the movie (Text property).
+- **Run Time**: The runtime of the movie (Text property).
+- **Rated**: The rating of the movie (Select property).
+- **Watched On**: The date you watched the movie (Date property).
+- **TMDB ID**: The TMDB ID of the movie (Number property).
+- **Tagline**: The tagline of the movie (Text property).
+- **My Rating**: Your rating for the movie (Select property).
+- **Trailer**: The URL of the movie trailer (URL property).
+- **Poster**: The URL of the movie poster (Files property).
+- **Language**: The language of the movie (Multi-select property).
+- **Director**: The director of the movie (Multi-select property).
+- **Cast**: The cast of the movie (Multi-select property).
+- **Plot**: The plot of the movie (Text property).
+- **Where To Watch**: The URL to watch the movie (URL property).
+- **Year**: The release year of the movie (Number property).
+- **Watch Count**: The number of times you've watched the movie (Number property).
+- **IMDB Rating**: The IMDB rating of the movie (Number property).
+- **Box Office**: The box office revenue of the movie (Number property).
+- **Collection**: The movie collection or series (Relation property).
+
+## API Endpoints
+
+### Fetch Movies
+
+- **Endpoint**: `GET /api/movie/fetch`
+- **Description**: Fetches all the movies from your Notion database.
+- **Response**: A JSON object containing the list of movies.
+
+### Add/Update Movie
+
+- **Endpoint**: `POST /api/movie/write`
+- **Description**: Adds a new movie to your Notion database or updates an existing one.
+- **Request Body**:
+  ```json
+  {
+    "title": "The Matrix",
+    "year": "1999",
+    "itemId": "EXISTING_NOTION_PAGE_ID", // Optional
+    "watched": false // Optional
+  }
+  ```
+- **Response**: A JSON object containing the status of the operation.

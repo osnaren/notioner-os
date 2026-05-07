@@ -1,4 +1,4 @@
-import { ALLOWED_HOSTS } from '@config/constants';
+import { ALLOWED_HOSTS } from '@/config/constants';
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 
@@ -23,7 +23,7 @@ const validateIP = (ip: string): boolean => {
  * @returns {string} The client IP address as a string.
  */
 const getClientIP = (req: NextRequest): string => {
-  return req.headers.get('CF-Connecting-IP') || req.headers.get('x-forwarded-for') || req.ip || '';
+  return req.headers.get('CF-Connecting-IP') || req.headers.get('x-forwarded-for') || '';
 };
 
 /**
