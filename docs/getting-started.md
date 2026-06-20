@@ -13,6 +13,7 @@ Before you begin, ensure you have the following installed:
 ## Installation
 
 1. **Clone the repository**
+
    ```bash
    git clone https://github.com/your-username/notioner-os.git
    cd notioner-os
@@ -34,15 +35,16 @@ Before you begin, ensure you have the following installed:
 
 2. **Set up environment variables**
    Create a `.env.local` file in the root directory with the following content:
+
    ```env
    # Notion
    NOTION_AUTH_TOKEN=your_notion_integration_token
    NOTION_MOVIES_DB_ID=your_movies_database_id
-   
+
    # External APIs
    TMDB_API_KEY=your_tmdb_api_key
    OMDB_API_KEY=your_omdb_api_key
-   
+
    # Optional: Set to 'true' for development
    NODE_ENV=development
    ```
@@ -55,6 +57,7 @@ Before you begin, ensure you have the following installed:
 ## Running the Application
 
 1. **Start the development server**
+
    ```bash
    npm run dev
    # or

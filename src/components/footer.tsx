@@ -1,14 +1,14 @@
+import { Github, Linkedin, Twitter } from 'lucide-react';
 import Link from 'next/link';
-import { Github, Twitter, Linkedin } from 'lucide-react';
 
 export function Footer() {
   return (
-    <footer className="border-t bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <footer className="bg-background/95 supports-[backdrop-filter]:bg-background/60 border-t backdrop-blur">
       <div className="container py-10">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-4">
           <div className="space-y-4">
             <h3 className="text-lg font-semibold">Notioner OS</h3>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-muted-foreground text-sm">
               Supercharge your Notion workspace with powerful tools and automations.
             </p>
             <div className="flex space-x-4">
@@ -16,7 +16,7 @@ export function Footer() {
                 href="https://github.com/yourusername/notioner-os"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-muted-foreground transition-colors hover:text-foreground"
+                className="text-muted-foreground hover:text-foreground transition-colors"
               >
                 <span className="sr-only">GitHub</span>
                 <Github className="h-5 w-5" />
@@ -25,7 +25,7 @@ export function Footer() {
                 href="https://twitter.com/yourusername"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-muted-foreground transition-colors hover:text-foreground"
+                className="text-muted-foreground hover:text-foreground transition-colors"
               >
                 <span className="sr-only">Twitter</span>
                 <Twitter className="h-5 w-5" />
@@ -34,7 +34,7 @@ export function Footer() {
                 href="https://linkedin.com/in/yourusername"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-muted-foreground transition-colors hover:text-foreground"
+                className="text-muted-foreground hover:text-foreground transition-colors"
               >
                 <span className="sr-only">LinkedIn</span>
                 <Linkedin className="h-5 w-5" />
@@ -44,7 +44,7 @@ export function Footer() {
 
           <div>
             <h4 className="mb-4 text-sm font-semibold">Product</h4>
-            <ul className="space-y-2 text-sm text-muted-foreground">
+            <ul className="text-muted-foreground space-y-2 text-sm">
               <li>
                 <Link href="/features" className="hover:text-foreground">
                   Features
@@ -70,7 +70,7 @@ export function Footer() {
 
           <div>
             <h4 className="mb-4 text-sm font-semibold">Resources</h4>
-            <ul className="space-y-2 text-sm text-muted-foreground">
+            <ul className="text-muted-foreground space-y-2 text-sm">
               <li>
                 <Link href="/docs" className="hover:text-foreground">
                   Documentation
@@ -96,7 +96,7 @@ export function Footer() {
 
           <div>
             <h4 className="mb-4 text-sm font-semibold">Company</h4>
-            <ul className="space-y-2 text-sm text-muted-foreground">
+            <ul className="text-muted-foreground space-y-2 text-sm">
               <li>
                 <Link href="/about" className="hover:text-foreground">
                   About
@@ -121,7 +121,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 border-t pt-8 text-center text-sm text-muted-foreground">
+        <div className="text-muted-foreground mt-12 border-t pt-8 text-center text-sm">
           <p>© {new Date().getFullYear()} Notioner OS. All rights reserved.</p>
         </div>
       </div>

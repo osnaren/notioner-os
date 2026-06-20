@@ -39,12 +39,14 @@ Notioner OS is a powerful application designed to supercharge your Notion worksp
 ### Installation
 
 1. **Clone the repository**
+
    ```bash
    git clone https://github.com/your-username/notioner-os.git
    cd notioner-os
    ```
 
 2. **Install dependencies**
+
    ```bash
    npm install
    # or
@@ -53,6 +55,7 @@ Notioner OS is a powerful application designed to supercharge your Notion worksp
 
 3. **Configure environment variables**
    Copy `.env.example` to `.env.local` and update the values:
+
    ```env
    NOTION_AUTH_TOKEN=your_notion_integration_token
    NOTION_MOVIES_DB_ID=your_movies_database_id

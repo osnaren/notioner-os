@@ -27,6 +27,7 @@ GET /api/movie
 ```
 
 **Response**
+
 ```json
 {
   "results": [
@@ -56,6 +57,7 @@ Content-Type: application/json
 ```
 
 **Response**
+
 ```json
 {
   "id": "new_page_id",
@@ -74,6 +76,7 @@ Errors follow the standard HTTP status codes:
 - `500 Internal Server Error` - Server error
 
 Error response format:
+
 ```json
 {
   "error": {

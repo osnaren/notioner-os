@@ -14,7 +14,7 @@ export default tmdb;
  * @return {Promise<TmdbMovie>} The full TMDB movie data.
  */
 export const getTMDBMovieDataByIMDBId = async (imdbID: string): Promise<TmdbMovie> => {
-  const tmdbData = await tmdb.find.byId(imdbID, { external_source: 'imdb_id' });
+  const tmdbData = await tmdb.find.byExternalId(imdbID, { external_source: 'imdb_id' });
   const tmdbMovie = tmdbData.movie_results[0];
 
   const fullTmdbData = await tmdb.movies.details(tmdbMovie.id, [

@@ -61,6 +61,7 @@ Looking for your first contribution? Check out issues with the `good first issue
 ## Development Workflow
 
 1. **Sync your fork** with the main repository
+
    ```bash
    git remote add upstream https://github.com/your-username/notioner-os.git
    git fetch upstream
@@ -69,17 +70,20 @@ Looking for your first contribution? Check out issues with the `good first issue
    ```
 
 2. **Create a new branch** for your feature or bugfix
+
    ```bash
    git checkout -b feature/your-feature-name
    ```
 
 3. **Make your changes** and commit them
+
    ```bash
    git add .
    git commit -m "feat: add new feature"
    ```
 
 4. **Push your changes** to your fork
+
    ```bash
    git push -u origin feature/your-feature-name
    ```
@@ -120,6 +124,7 @@ We follow the [Conventional Commits](https://www.conventionalcommits.org/) speci
 ```
 
 ### Types:
+
 - `feat`: A new feature
 - `fix`: A bug fix
 - `docs`: Documentation only changes
@@ -130,6 +135,7 @@ We follow the [Conventional Commits](https://www.conventionalcommits.org/) speci
 - `chore`: Changes to the build process or auxiliary tools
 
 ### Examples:
+
 ```
 feat(auth): add login with Google
 

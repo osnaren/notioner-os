@@ -1,8 +1,6 @@
 'use client';
 
-import * as React from 'react';
-import { ThemeProvider as NextThemesProvider } from 'next-themes';
-import { ThemeProviderProps } from 'next-themes';
+import { ThemeProvider as NextThemesProvider, ThemeProviderProps } from 'next-themes';
 
 /**
  * A wrapper around next-themes' ThemeProvider that provides type safety

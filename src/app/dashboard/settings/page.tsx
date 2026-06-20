@@ -4,21 +4,13 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 
-import { Button } from '@/components/ui/button';
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
-import { Switch } from '@/components/ui/switch';
-import { toast } from '@/components/ui/use-toast';
-import { Separator } from '@/components/ui/separator';
-import { ThemeToggle } from '@/components/theme-toggle';
+import { ThemeToggle } from '@components/theme-toggle';
+import { Button } from '@components/ui/button';
+import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@components/ui/form';
+import { Input } from '@components/ui/input';
+import { Separator } from '@components/ui/separator';
+import { Switch } from '@components/ui/switch';
+import { toast } from '@components/ui/use-toast';
 
 const settingsFormSchema = z.object({
   name: z.string().min(2, {
@@ -35,14 +27,14 @@ type SettingsFormValues = z.infer<typeof settingsFormSchema>;
 
 export default function SettingsPage() {
   // Mock user data - replace with actual user data from your auth provider
-  const defaultValues: Partial<SettingsFormValues> = {
+  const defaultValues: SettingsFormValues = {
     name: 'John Doe',
     email: 'john@example.com',
     notifications: true,
     marketingEmails: false,
   };
 
-  const form = useForm<SettingsFormValues>({
+  const form = useForm({
     resolver: zodResolver(settingsFormSchema),
     defaultValues,
   });
@@ -59,9 +51,7 @@ export default function SettingsPage() {
     <div className="space-y-6">
       <div>
         <h1 className="text-3xl font-bold tracking-tight">Settings</h1>
-        <p className="text-muted-foreground">
-          Manage your account settings and preferences.
-        </p>
+        <p className="text-muted-foreground">Manage your account settings and preferences.</p>
       </div>
 
       <Separator />
@@ -71,9 +61,7 @@ export default function SettingsPage() {
           <div className="space-y-6">
             <div>
               <h2 className="text-lg font-medium">Profile</h2>
-              <p className="text-sm text-muted-foreground">
-                Update your profile information.
-              </p>
+              <p className="text-muted-foreground text-sm">Update your profile information.</p>
             </div>
 
             <div className="space-y-4">
@@ -111,9 +99,7 @@ export default function SettingsPage() {
           <div className="space-y-6">
             <div>
               <h2 className="text-lg font-medium">Preferences</h2>
-              <p className="text-sm text-muted-foreground">
-                Configure how you receive notifications.
-              </p>
+              <p className="text-muted-foreground text-sm">Configure how you receive notifications.</p>
             </div>
 
             <div className="space-y-4">
@@ -124,15 +110,10 @@ export default function SettingsPage() {
                   <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
                     <div className="space-y-0.5">
                       <FormLabel className="text-base">Notifications</FormLabel>
-                      <FormDescription>
-                        Receive notifications about your account.
-                      </FormDescription>
+                      <FormDescription>Receive notifications about your account.</FormDescription>
                     </div>
                     <FormControl>
-                      <Switch
-                        checked={field.value}
-                        onCheckedChange={field.onChange}
-                      />
+                      <Switch checked={field.value} onCheckedChange={field.onChange} />
                     </FormControl>
                   </FormItem>
                 )}
@@ -144,15 +125,10 @@ export default function SettingsPage() {
                   <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
                     <div className="space-y-0.5">
                       <FormLabel className="text-base">Marketing Emails</FormLabel>
-                      <FormDescription>
-                        Receive emails about new products, features, and more.
-                      </FormDescription>
+                      <FormDescription>Receive emails about new products, features, and more.</FormDescription>
                     </div>
                     <FormControl>
-                      <Switch
-                        checked={field.value}
-                        onCheckedChange={field.onChange}
-                      />
+                      <Switch checked={field.value} onCheckedChange={field.onChange} />
                     </FormControl>
                   </FormItem>
                 )}
@@ -165,17 +141,13 @@ export default function SettingsPage() {
           <div className="space-y-6">
             <div>
               <h2 className="text-lg font-medium">Appearance</h2>
-              <p className="text-sm text-muted-foreground">
-                Customize the appearance of the app.
-              </p>
+              <p className="text-muted-foreground text-sm">Customize the appearance of the app.</p>
             </div>
 
             <div className="flex items-center justify-between rounded-lg border p-4">
               <div className="space-y-0.5">
                 <p className="text-sm font-medium">Theme</p>
-                <p className="text-sm text-muted-foreground">
-                  Select your preferred theme.
-                </p>
+                <p className="text-muted-foreground text-sm">Select your preferred theme.</p>
               </div>
               <ThemeToggle />
             </div>

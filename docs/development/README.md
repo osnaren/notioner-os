@@ -14,12 +14,14 @@ Welcome to the Notioner OS development guide! This document will help you get st
 ## Development Setup
 
 1. **Fork and clone the repository**
+
    ```bash
    git clone https://github.com/your-username/notioner-os.git
    cd notioner-os
    ```
 
 2. **Install dependencies**
+
    ```bash
    npm install
    ```
@@ -102,6 +104,7 @@ npm test -- --coverage
 ## Git Workflow
 
 1. Create a new branch for your feature or bugfix:
+
    ```bash
    git checkout -b feature/your-feature-name
    # or
@@ -109,12 +112,14 @@ npm test -- --coverage
    ```
 
 2. Make your changes and commit them:
+
    ```bash
    git add .
    git commit -m "feat: add new feature"
    ```
 
 3. Push your changes to your fork:
+
    ```bash
    git push origin your-branch-name
    ```
@@ -132,6 +137,7 @@ npm test -- --coverage
 ```
 
 **Types**:
+
 - `feat`: New feature
 - `fix`: Bug fix
 - `docs`: Documentation changes

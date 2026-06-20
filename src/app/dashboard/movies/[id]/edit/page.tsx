@@ -1,9 +1,10 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
-import { Button } from '@/components/ui/button';
 import { MovieForm } from '@/components/movie-form';
+import { Button } from '@/components/ui/button';
 import { toast } from '@/components/ui/use-toast';
+import { useRouter } from 'next/navigation';
+import React from 'react';
 
 // Mock function to fetch movie data - replace with actual API call
 const getMovie = async (id: string) => {
@@ -11,7 +12,8 @@ const getMovie = async (id: string) => {
     {
       id: '1',
       title: 'Inception',
-      overview: 'A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O.',
+      overview:
+        'A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O.',
       releaseDate: new Date('2010-07-16'),
       rating: 4.5,
       status: 'WATCHED' as const,
@@ -19,7 +21,7 @@ const getMovie = async (id: string) => {
     // Add more mock movies as needed
   ];
 
-  return movies.find(movie => movie.id === id) || null;
+  return movies.find((movie) => movie.id === id) || null;
 };
 
 export default function EditMoviePage({ params }: { params: { id: string } }) {
@@ -52,19 +54,19 @@ export default function EditMoviePage({ params }: { params: { id: string } }) {
 
   async function onSubmit(data: any) {
     setIsLoading(true);
-    
+
     try {
       // In a real app, you would make an API call to update the movie
       console.log('Updating movie:', data);
-      
+
       // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
       toast({
         title: 'Success!',
         description: 'Movie updated successfully.',
       });
-      
+
       // Redirect to movie detail page
       router.push(`/dashboard/movies/${params.id}`);
     } catch (error) {
@@ -82,7 +84,7 @@ export default function EditMoviePage({ params }: { params: { id: string } }) {
   if (!initialData) {
     return (
       <div className="flex h-64 items-center justify-center">
-        <div className="h-8 w-8 animate-spin rounded-full border-4 border-primary border-t-transparent"></div>
+        <div className="border-primary h-8 w-8 animate-spin rounded-full border-4 border-t-transparent"></div>
       </div>
     );
   }
@@ -92,25 +94,15 @@ export default function EditMoviePage({ params }: { params: { id: string } }) {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold tracking-tight">Edit Movie</h1>
-          <p className="text-muted-foreground">
-            Update the details of {initialData.title}
-          </p>
+          <p className="text-muted-foreground">Update the details of {initialData.title}</p>
         </div>
-        <Button 
-          variant="outline" 
-          onClick={() => router.back()}
-          disabled={isLoading}
-        >
+        <Button variant="outline" onClick={() => router.back()} disabled={isLoading}>
           Cancel
         </Button>
       </div>
 
-      <div className="rounded-lg border bg-card p-6 shadow-sm">
-        <MovieForm 
-          initialData={initialData} 
-          onSubmit={onSubmit} 
-          isLoading={isLoading} 
-        />
+      <div className="bg-card rounded-lg border p-6 shadow-sm">
+        <MovieForm initialData={initialData} onSubmit={onSubmit} isLoading={isLoading} />
       </div>
     </div>
   );

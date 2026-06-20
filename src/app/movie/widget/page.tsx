@@ -8,12 +8,12 @@ import { z } from 'zod';
 
 import { createRequest } from '@utils/api';
 
-import { Button } from '@cui/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@cui/components/ui/card';
-import { Checkbox } from '@cui/components/ui/checkbox';
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@cui/components/ui/form';
-import { HoverCard, HoverCardContent, HoverCardTrigger } from '@cui/components/ui/hover-card';
-import { Input } from '@cui/components/ui/input';
+import { Button } from '@components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@components/ui/card';
+import { Checkbox } from '@components/ui/checkbox';
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@components/ui/form';
+import { HoverCard, HoverCardContent, HoverCardTrigger } from '@components/ui/hover-card';
+import { Input } from '@components/ui/input';
 
 import { ReloadIcon } from '@radix-ui/react-icons';
 import { BsCalendarDate } from 'react-icons/bs';

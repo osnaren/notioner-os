@@ -1,6 +1,5 @@
 'use client';
 
-import * as React from 'react';
 import { useTheme } from 'next-themes';
 
 import { Toast, ToastProvider, ToastViewport } from '@/components/ui/toast';
@@ -13,16 +12,10 @@ export function Toaster() {
   return (
     <ToastProvider>
       {toasts.map(({ id, title, description, action, ...props }) => (
-        <Toast
-          key={id}
-          {...props}
-          className={`${theme === 'dark' ? 'bg-background' : 'bg-white'}`}
-        >
+        <Toast key={id} {...props} className={`${theme === 'dark' ? 'bg-background' : 'bg-white'}`}>
           <div className="grid gap-1">
             {title && <div className="font-medium">{title}</div>}
-            {description && (
-              <div className="text-sm opacity-90">{description}</div>
-            )}
+            {description && <div className="text-sm opacity-90">{description}</div>}
           </div>
           {action}
         </Toast>

@@ -74,23 +74,20 @@ export function formatBytes(
 ) {
   const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
   const accurateSizes = ['Bytes', 'KiB', 'MiB', 'GiB', 'TiB'];
-  
+
   if (bytes === 0) return `0${includeSpace ? ' ' : ''}Bytes`;
-  
+
   const i = Math.floor(Math.log(bytes) / Math.log(1024));
   const sizeArray = sizeType === 'accurate' ? accurateSizes : sizes;
   const size = sizeArray[Math.min(i, sizeArray.length - 1)] || 'Bytes';
-  
+
   return `${(bytes / Math.pow(1024, i)).toFixed(decimals)}${includeSpace ? ' ' : ''}${size}`;
 }
 
 /**
  * Creates a debounced function that delays invoking `func` until after `wait` milliseconds
  */
-export function debounce<T extends (...args: any[]) => void>(
-  func: T,
-  wait: number
-): (...args: Parameters<T>) => void {
+export function debounce<T extends (...args: any[]) => void>(func: T, wait: number): (...args: Parameters<T>) => void {
   let timeout: NodeJS.Timeout;
   return function (this: any, ...args: Parameters<T>) {
     clearTimeout(timeout);
@@ -101,10 +98,7 @@ export function debounce<T extends (...args: any[]) => void>(
 /**
  * Creates a throttled function that only invokes `func` at most once per `limit` milliseconds
  */
-export function throttle<T extends (...args: any[]) => void>(
-  func: T,
-  limit: number
-): (...args: Parameters<T>) => void {
+export function throttle<T extends (...args: any[]) => void>(func: T, limit: number): (...args: Parameters<T>) => void {
   let inThrottle = false;
   return function (this: any, ...args: Parameters<T>) {
     if (!inThrottle) {
@@ -151,10 +145,7 @@ export function toCamelCase(str: string): string {
  * Converts a string to Title Case
  */
 export function toTitleCase(str: string): string {
-  return str.replace(
-    /\w\S*/g,
-    (txt) => txt.charAt(0).toUpperCase() + txt.substring(1).toLowerCase()
-  );
+  return str.replace(/\w\S*/g, (txt) => txt.charAt(0).toUpperCase() + txt.substring(1).toLowerCase());
 }
 
 /**
@@ -170,15 +161,15 @@ export const isProd = process.env.NODE_ENV === 'production';
 /**
  * Safely access nested object properties
  */
-export function getNestedValue<T = unknown>(
-  obj: Record<string, any>,
-  path: string,
-  defaultValue?: T
-): T | undefined {
-  const value = path
-    .split('.')
-    .reduce((acc, key) => (acc && acc[key] !== undefined ? acc[key] : undefined), obj);
-  return value !== undefined ? value : defaultValue;
+export function getNestedValue<T = unknown>(obj: Record<string, any>, path: string, defaultValue?: T): T | undefined {
+  const value = path.split('.').reduce<unknown>((acc, key) => {
+    if (acc !== null && typeof acc === 'object' && key in (acc as Record<string, unknown>)) {
+      return (acc as Record<string, unknown>)[key];
+    }
+    return undefined;
+  }, obj);
+
+  return value !== undefined ? (value as T) : defaultValue;
 }
 
 /**
@@ -203,11 +194,9 @@ export function sleep(ms: number): Promise<void> {
 /**
  * Creates a type-safe version of Object.keys
  */
-export const objectKeys = <T extends object>(obj: T) => 
-  Object.keys(obj) as Array<keyof T>;
+export const objectKeys = <T extends object>(obj: T) => Object.keys(obj) as Array<keyof T>;
 
 /**
  * Creates a type-safe version of Object.entries
  */
-export const objectEntries = <T extends object>(obj: T) =>
-  Object.entries(obj) as Array<[keyof T, T[keyof T]]>;
+export const objectEntries = <T extends object>(obj: T) => Object.entries(obj) as Array<[keyof T, T[keyof T]]>;

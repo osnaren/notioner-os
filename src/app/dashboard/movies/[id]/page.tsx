@@ -1,8 +1,8 @@
-import { notFound } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { ArrowLeft, Calendar, Clock, Film, Star, Ticket, User } from 'lucide-react';
+import { ArrowLeft, Calendar, Clock, Film, Star, Ticket } from 'lucide-react';
 import Link from 'next/link';
+import { notFound } from 'next/navigation';
 
 // Mock data - replace with actual data from your API
 const getMovie = async (id: string) => {
@@ -14,7 +14,8 @@ const getMovie = async (id: string) => {
       director: 'Christopher Nolan',
       rating: 4.5,
       runtime: 148,
-      overview: 'A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O.',
+      overview:
+        'A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O.',
       posterPath: '/9gk7adHYeDvHkCSEqAvQNLV5Uge.jpg',
       backdropPath: '/s3TBrRGBYiavqx000QeIAyMYqm8.jpg',
       status: 'Watched',
@@ -23,7 +24,7 @@ const getMovie = async (id: string) => {
     // Add more mock movies as needed
   ];
 
-  return movies.find(movie => movie.id === id) || null;
+  return movies.find((movie) => movie.id === id) || null;
 };
 
 export default async function MovieDetailPage({ params }: { params: { id: string } }) {
@@ -44,7 +45,7 @@ export default async function MovieDetailPage({ params }: { params: { id: string
             </Link>
           </Button>
           <h1 className="mt-2 text-3xl font-bold tracking-tight">{movie.title}</h1>
-          <div className="mt-1 flex items-center space-x-4 text-sm text-muted-foreground">
+          <div className="text-muted-foreground mt-1 flex items-center space-x-4 text-sm">
             <div className="flex items-center">
               <Calendar className="mr-1 h-4 w-4" />
               {movie.year}
@@ -68,7 +69,7 @@ export default async function MovieDetailPage({ params }: { params: { id: string
       </div>
 
       <div className="grid gap-6 md:grid-cols-3">
-        <div className="md:col-span-2 space-y-6">
+        <div className="space-y-6 md:col-span-2">
           <Card>
             <CardHeader>
               <CardTitle>Overview</CardTitle>
@@ -84,16 +85,16 @@ export default async function MovieDetailPage({ params }: { params: { id: string
             </CardHeader>
             <CardContent className="space-y-4">
               <div>
-                <h4 className="text-sm font-medium text-muted-foreground">Director</h4>
+                <h4 className="text-muted-foreground text-sm font-medium">Director</h4>
                 <p className="mt-1">{movie.director}</p>
               </div>
               <div>
-                <h4 className="text-sm font-medium text-muted-foreground">Genres</h4>
+                <h4 className="text-muted-foreground text-sm font-medium">Genres</h4>
                 <div className="mt-1 flex flex-wrap gap-2">
                   {movie.genres.map((genre) => (
                     <span
                       key={genre}
-                      className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+                      className="focus:ring-ring inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:ring-2 focus:ring-offset-2 focus:outline-none"
                     >
                       {genre}
                     </span>
@@ -101,7 +102,7 @@ export default async function MovieDetailPage({ params }: { params: { id: string
                 </div>
               </div>
               <div>
-                <h4 className="text-sm font-medium text-muted-foreground">Status</h4>
+                <h4 className="text-muted-foreground text-sm font-medium">Status</h4>
                 <div className="mt-1">
                   <span
                     className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${
@@ -121,7 +122,7 @@ export default async function MovieDetailPage({ params }: { params: { id: string
         <div className="space-y-6">
           <Card>
             <CardContent className="p-0">
-              <div className="aspect-[2/3] w-full overflow-hidden rounded-t-lg bg-muted">
+              <div className="bg-muted aspect-[2/3] w-full overflow-hidden rounded-t-lg">
                 {movie.posterPath ? (
                   <img
                     src={`https://image.tmdb.org/t/p/w500${movie.posterPath}`}
@@ -130,7 +131,7 @@ export default async function MovieDetailPage({ params }: { params: { id: string
                   />
                 ) : (
                   <div className="flex h-full items-center justify-center">
-                    <Film className="h-12 w-12 text-muted-foreground/50" />
+                    <Film className="text-muted-foreground/50 h-12 w-12" />
                   </div>
                 )}
               </div>

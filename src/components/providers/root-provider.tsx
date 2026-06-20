@@ -1,8 +1,8 @@
 'use client';
 
+import { Toaster } from '@/components/ui/sonner';
 import * as React from 'react';
 import { ThemeProvider } from './theme-provider';
-import { Toaster } from '@/components/ui/sonner';
 
 interface RootProviderProps {
   children: React.ReactNode;

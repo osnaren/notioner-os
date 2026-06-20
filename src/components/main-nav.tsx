@@ -1,13 +1,13 @@
 'use client';
 
-import { useState } from 'react';
+import { ThemeToggle } from '@/components/theme-toggle';
+import { Button } from '@/components/ui/button';
+import { UserDropdown } from '@/components/user-dropdown';
+import { cn } from '@/lib/utils';
+import { Menu, X } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, X } from 'lucide-react';
-import { cn } from '@/lib/utils';
-import { Button } from '@/components/ui/button';
-import { ThemeToggle } from '@/components/theme-toggle';
-import { UserDropdown } from '@/components/user-dropdown';
+import { useState } from 'react';
 
 const navItems = [
   { name: 'Dashboard', href: '/dashboard' },
@@ -37,7 +37,7 @@ export function MainNav() {
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  'transition-colors hover:text-foreground/80',
+                  'hover:text-foreground/80 transition-colors',
                   isActive(item.href) ? 'text-foreground' : 'text-foreground/60'
                 )}
               >
@@ -46,23 +46,14 @@ export function MainNav() {
             ))}
           </nav>
         </div>
-        
+
         <div className="flex items-center space-x-2">
           <ThemeToggle />
           <div className="hidden md:block">
             <UserDropdown />
           </div>
-          <Button
-            variant="ghost"
-            size="icon"
-            className="md:hidden"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          >
-            {mobileMenuOpen ? (
-              <X className="h-5 w-5" />
-            ) : (
-              <Menu className="h-5 w-5" />
-            )}
+          <Button variant="ghost" size="icon" className="md:hidden" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+            {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             <span className="sr-only">Toggle menu</span>
           </Button>
         </div>
@@ -70,7 +61,7 @@ export function MainNav() {
 
       {/* Mobile menu */}
       {mobileMenuOpen && (
-        <div className="absolute left-0 right-0 top-16 z-50 border-b bg-background p-4 shadow-md md:hidden">
+        <div className="bg-background absolute top-16 right-0 left-0 z-50 border-b p-4 shadow-md md:hidden">
           <div className="flex flex-col space-y-2">
             {navItems.map((item) => (
               <Link

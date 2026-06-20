@@ -5,23 +5,15 @@ import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 
 import { Button } from '@/components/ui/button';
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { toast } from '@/components/ui/use-toast';
-import { CalendarIcon, Loader2 } from 'lucide-react';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { format } from 'date-fns';
 import { Calendar } from '@/components/ui/calendar';
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { toast } from '@/components/ui/use-toast';
 import { cn } from '@/lib/utils';
+import { Textarea } from '@components/ui/textarea';
+import { format } from 'date-fns';
+import { CalendarIcon, Loader2 } from 'lucide-react';
 
 const movieFormSchema = z.object({
   title: z.string().min(2, {
@@ -102,16 +94,9 @@ export function MovieForm({ initialData, onSubmit, isLoading = false }: MovieFor
                       <FormControl>
                         <Button
                           variant="outline"
-                          className={cn(
-                            'pl-3 text-left font-normal',
-                            !field.value && 'text-muted-foreground'
-                          )}
+                          className={cn('pl-3 text-left font-normal', !field.value && 'text-muted-foreground')}
                         >
-                          {field.value ? (
-                            format(field.value, 'PPP')
-                          ) : (
-                            <span>Pick a date</span>
-                          )}
+                          {field.value ? format(field.value, 'PPP') : <span>Pick a date</span>}
                           <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
                         </Button>
                       </FormControl>
@@ -121,9 +106,7 @@ export function MovieForm({ initialData, onSubmit, isLoading = false }: MovieFor
                         mode="single"
                         selected={field.value}
                         onSelect={field.onChange}
-                        disabled={(date) =>
-                          date > new Date() || date < new Date('1900-01-01')
-                        }
+                        disabled={(date) => date > new Date() || date < new Date('1900-01-01')}
                         initialFocus
                       />
                     </PopoverContent>
@@ -163,11 +146,7 @@ export function MovieForm({ initialData, onSubmit, isLoading = false }: MovieFor
                 <FormItem>
                   <FormLabel>Overview</FormLabel>
                   <FormControl>
-                    <Textarea
-                      placeholder="Movie plot summary"
-                      className="min-h-[200px]"
-                      {...field}
-                    />
+                    <Textarea placeholder="Movie plot summary" className="min-h-[200px]" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

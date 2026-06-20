@@ -1,17 +1,15 @@
-import { ReactNode } from 'react';
-import { MainNav } from '@/components/main-nav';
 import { Footer } from '@/components/footer';
+import { MainNav } from '@/components/main-nav';
 import { Sidebar } from '@/components/sidebar';
+import { ReactNode } from 'react';
 
 export default function DashboardLayout({ children }: { children: ReactNode }) {
   return (
     <div className="flex min-h-screen flex-col">
-      <header className="sticky top-0 z-40 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <header className="bg-background/95 supports-[backdrop-filter]:bg-background/60 sticky top-0 z-40 border-b backdrop-blur">
         <div className="container flex h-16 items-center justify-between py-4">
           <MainNav />
-          <div className="flex items-center space-x-4">
-            {/* User account dropdown or other header items */}
-          </div>
+          <div className="flex items-center space-x-4">{/* User account dropdown or other header items */}</div>
         </div>
       </header>
       <div className="flex flex-1">

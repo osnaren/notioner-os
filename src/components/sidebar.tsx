@@ -1,10 +1,10 @@
 'use client';
 
+import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
+import { BarChart2, FileText, Film, Home, Plus, Settings, Users } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { cn } from '@/lib/utils';
-import { Button } from '@/components/ui/button';
-import { Home, Film, Settings, FileText, Users, BarChart2, Plus } from 'lucide-react';
 
 type NavItem = {
   title: string;
@@ -58,10 +58,7 @@ export function Sidebar() {
             <Button
               key={item.href}
               variant={pathname === item.href ? 'secondary' : 'ghost'}
-              className={cn(
-                'w-full justify-start',
-                pathname === item.href ? 'bg-muted' : ''
-              )}
+              className={cn('w-full justify-start', pathname === item.href ? 'bg-muted' : '')}
               asChild
               disabled={item.disabled}
             >

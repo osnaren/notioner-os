@@ -71,7 +71,7 @@ export const updateNotionPage = async (movieData: MovieData, itemID: string) => 
   let response;
   if (itemID) {
     const moviePageDataWithId = { ...moviePageData, page_id: itemID };
-    response = await notion.updatePageProperties(moviePageDataWithId as UpdatePageParameters);
+    response = await notion.updatePageProperties(moviePageDataWithId as unknown as UpdatePageParameters);
   } else {
     const collectionId = await checkAndCreateMovieCollection(Collection);
     const moviePageDataWithId = {
@@ -79,7 +79,7 @@ export const updateNotionPage = async (movieData: MovieData, itemID: string) => 
       parent: { database_id: MOVIES_DB_ID },
       properties: { ...movieProperties, ...(collectionId && { Collection: createRelation(collectionId) }) },
     };
-    response = await notion.createPage(moviePageDataWithId as CreatePageParameters);
+    response = await notion.createPage(moviePageDataWithId as unknown as CreatePageParameters);
   }
   return response;
 };

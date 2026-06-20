@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { Plus, Search, Filter, MoreHorizontal } from 'lucide-react';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@components/ui/table';
+import { Filter, MoreHorizontal, Plus, Search } from 'lucide-react';
 import Link from 'next/link';
 
 // Mock data - replace with actual data from your API
@@ -54,9 +54,7 @@ export default function MoviesPage() {
       <div className="flex flex-col justify-between space-y-2 sm:flex-row sm:items-center sm:space-y-0">
         <div>
           <h1 className="text-3xl font-bold tracking-tight">Movies</h1>
-          <p className="text-muted-foreground">
-            Manage your movie collection and track what you've watched
-          </p>
+          <p className="text-muted-foreground">Manage your movie collection and track what you've watched</p>
         </div>
         <Button asChild>
           <Link href="/dashboard/movies/new">
@@ -68,12 +66,8 @@ export default function MoviesPage() {
 
       <div className="flex flex-col space-y-4 md:flex-row md:items-center md:justify-between md:space-y-0">
         <div className="relative w-full md:max-w-sm">
-          <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-          <Input
-            type="search"
-            placeholder="Search movies..."
-            className="w-full pl-8"
-          />
+          <Search className="text-muted-foreground absolute top-2.5 left-2.5 h-4 w-4" />
+          <Input type="search" placeholder="Search movies..." className="w-full pl-8" />
         </div>
         <div className="flex items-center space-x-2">
           <Button variant="outline" size="sm" className="h-10">
